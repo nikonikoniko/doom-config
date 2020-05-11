@@ -21,10 +21,7 @@
 
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
-(package! purp-theme)
-(package! tao-theme)
-(package! eziam-theme)
-(package! vue-mode)
+;; (package! vue-mode)
 (package! html-mode)
 (package! web-mode)
 (package! evil-terminal-cursor-changer)

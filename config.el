@@ -51,16 +51,44 @@
 (add-hook 'text-mode-hook
   (lambda ()
     (variable-pitch-mode 1)))
-
-(add-hook 'vue-mode-hook #'lsp!)
-
+ 
 (custom-set-variables
   '(neo-window-position (quote right)))
+ 
+;; (use-package! evil-terminal-cursor-changer
+;;  :hook (tty-setup . evil-terminal-cursor-changer-activate))
 
-(use-package! evil-terminal-cursor-changer
-  :hook (tty-setup . evil-terminal-cursor-changer-activate))
+(defun setup-tide-mode ()
+  (interactive)
+  (tide-setup)
+  ;; (flycheck-mode +1)
+  ;; (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (eldoc-mode +1)
+  (tide-hl-identifier-mode +1)
+  (add-hook 'typescript-mode-local-vars-hook
+          (lambda ()
+            (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)))
+(add-hook 'typescript-mode-local-vars-hook
+          (lambda ()
+            (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)))
+
+;;(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
+;;(setq flycheck-disabled-checkers '(typescript-tslint))
+
+)
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+ 
 
 (require 'web-mode)
+(add-hook 'web-mode-hook
+          (lambda ()
+            (when (string-equal "tsx" (file-name-extension buffer-file-name))
+              (setup-tide-mode))))
+;; enable typescript-tslint checker
+;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+
+
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.jsp\\'" . web-mode))
@@ -70,4 +98,5 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 
