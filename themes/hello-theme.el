@@ -62,6 +62,7 @@
  '(flycheck-error ((t (:foreground "#ffffff" :background "red"))))
  '(match ((t (:weight bold :foreground "#ffffff" :background "#444444"))))
  '(next-error ((t (:inherit (region)))))
- '(query-replace ((t (:inherit (isearch))))))
+ '(query-replace ((t (:inherit (isearch)))))
+ )
 
 (provide-theme 'hello)

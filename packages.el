@@ -22,9 +22,16 @@
 ;; To install SOME-PACKAGE from MELPA, ELPA or emacsmirror:
 ;(package! some-package)
 ;; (package! vue-mode)
-(package! html-mode)
+;; (package! html-mode)
 (package! web-mode)
+(package! company-org-roam)
+(package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
+;;(package! load-theme-buffer-local :recipe
+;;  (:host github :repo "nikonikoniko/color-theme-buffer-local"))
+
+(package! load-theme-buffer-local :disable t)
+(package! color-theme-buffer-local :disable t)
 
 ;; To install a package directly from a particular repo, you'll need to specify
 ;; a `:recipe'. You'll find documentation on what `:recipe' accepts here:
