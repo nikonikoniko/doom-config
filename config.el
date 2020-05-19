@@ -62,38 +62,38 @@
 ;; (use-package! evil-terminal-cursor-changer
 ;;  :hook (tty-setup . evil-terminal-cursor-changer-activate))
 
+(require 'web-mode)
+
+
+
+;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
-  ;; (flycheck-mode +1)
-  ;; (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (flycheck-mode +1)
+  (setq flycheck-check-syntax-automatically '(save mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-  (add-hook 'typescript-mode-local-vars-hook
-          (lambda ()
-            (flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)))
-(add-hook 'typescript-mode-local-vars-hook
-          (lambda ()
-            (flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)))
-
-;;(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
-;;(setq flycheck-disabled-checkers '(typescript-tslint))
+	;; ADD THESE TO MAKE SURE THAT ESLINT RUNS BOTH IN TSX-TIDE and TYPESCRIPT-TIDE
+        (flycheck-add-mode 'javascript-eslint 'web-mode)
+	(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
+	(setq flycheck-disabled-checkers '(typescript-tslint))
+	(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+	(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
+	(flycheck-add-mode 'javascript-eslint 'typescript-mode)
 
 )
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
-
- 
-(require 'company-org-roam)
-(require 'load-theme-buffer-local)
-(push 'company-org-roam company-backends)
-
-(require 'web-mode)
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 (add-hook 'web-mode-hook
           (lambda ()
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
-;; enable typescript-tslint checker
-;; (flycheck-add-mode 'typescript-tslint 'web-mode)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
@@ -105,12 +105,13 @@
 (add-to-list 'auto-mode-alist '("\\.mustache\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-;; (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 
-(setq debug-on-error t)
+;; (setq debug-on-error t)
 
 ;;(add-hook 'post-command-hook 'change-my-background-color)
 
+(require 'company-org-roam)
+(push 'company-org-roam company-backends)
 (add-hook 'after-change-major-mode-hook 'change-my-background-color)
 
 (add-hook 'window-configuration-change-hook 'change-my-background-color)
