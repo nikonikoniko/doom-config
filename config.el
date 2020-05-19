@@ -49,6 +49,21 @@
 ;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+(defun indent-force ()
+  	(setq typescript-indent-level 2)
+	(setq js-indent-level 2)
+	(setq js2-indent-level 2)
+	(setq javascript-indent-level 2)
+	(setq js2-basic-offset 2)
+	(setq web-mode-markup-indent-offset 2)
+	(setq indent-tabs-mode nil)
+	(setq web-mode-markup-indent-offset 2)
+  	(setq web-mode-css-indent-offset 2)
+  	(setq web-mode-code-indent-offset 2)
+	)
+(add-hook 'web-mode-hook #'indent-force)
+(add-hook 'typescript-mode-hook #'indent-force)
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -63,6 +78,7 @@
 	(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
 	(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 	(flycheck-add-mode 'javascript-eslint 'typescript-mode)
+
 )
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
