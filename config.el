@@ -74,10 +74,14 @@
 	;; ADD THESE TO MAKE SURE THAT ESLINT RUNS BOTH IN TSX-TIDE and TYPESCRIPT-TIDE
         (flycheck-add-mode 'javascript-eslint 'web-mode)
 	(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
-	(setq flycheck-disabled-checkers '(typescript-tslint))
-	(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
-	(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
-	(flycheck-add-mode 'javascript-eslint 'typescript-mode)
+	(add-to-list 'flycheck-disabled-checkers 'typescript-tide)
+	(add-to-list 'flycheck-disabled-checkers 'tsx-tide)
+
+	;;(setq flycheck-disabled-checkers 'typescript-tslint 'tsx-tide)
+
+	;;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+	;;(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
+	;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
 
 )
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
