@@ -28,18 +28,6 @@
 (custom-theme-set-faces
  'mono-dark
  `(default ((t (
-		:family "default" 
-		:foundry "default" 
-		:width normal 
-		:height 2
-		:line-spacing 20
-		:weight normal 
-		:slant normal 
-		:underline nil 
-		:overline nil 
-		:strike-through nil 
-		:box nil 
-		:inverse-video nil 
 		:foreground ,fgchroma4
 		:background "#333" 
 		:stipple nil 
@@ -48,6 +36,7 @@
  `(line-number ((t (:foreground ,bgchroma3))))
  `(line-number-current-line ((t (:foreground ,bgchroma4 :background ,bgchroma1))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
+ `(fringe ((t (:background ,bgchroma2))))
  `(fixed-pitch ((t (:family "Monospace"))))
  `(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
  `(escape-glyph ((t (:weight bold :foreground ,fgchroma6))))

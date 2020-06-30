@@ -2,18 +2,18 @@
   "Created 2020-03-09.")
 
 (let ((bgchroma1 "#fff")
-      (bgchroma2 "#eee")
-      (bgchroma3 "#ddd")
-      (bgchroma4 "#ccc")
-      (bgchroma5 "#bbb")
-      (bgchroma6 "#aaa")
+      (bgchroma2 "#efefef")
+      (bgchroma3 "#ededed")
+      (bgchroma4 "#eee")
+      (bgchroma5 "#ddd")
+      (bgchroma6 "#bbb")
 
-      (fgchroma1 "#000")
-      (fgchroma2 "#111")
-      (fgchroma3 "#222")
-      (fgchroma4 "#333")
-      (fgchroma5 "#444")
-      (fgchroma6 "#555")
+      (fgchroma1 "#111")
+      (fgchroma2 "#222")
+      (fgchroma3 "#333")
+      (fgchroma4 "#444")
+      (fgchroma5 "#555")
+      (fgchroma6 "#666")
 
       (err "red")
       (war "orange")
@@ -31,17 +31,6 @@
 (custom-theme-set-faces
  'mono-light
  `(default ((t (
-		:family "default" 
-		:foundry "default" 
-		:width normal 
-		:height 1 
-		:weight medium 
-		:slant normal 
-		:underline nil 
-		:overline nil 
-		:strike-through nil 
-		:box nil 
-		:inverse-video nil 
 		:foreground ,fgchroma4
 		:background ,bgchroma2
 		:stipple nil 
@@ -50,6 +39,7 @@
  `(line-number ((t (:foreground ,bgchroma3))))
  `(line-number-current-line ((t (:foreground ,bgchroma4 :background ,bgchroma1))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
+ `(fringe ((t (:background ,bgchroma2))))
  `(fixed-pitch ((t (:family "Monospace"))))
  `(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
  `(escape-glyph ((t (:weight bold :foreground ,fgchroma6))))
@@ -103,6 +93,8 @@
  `(flycheck-warning ((t (:foreground ,fgchroma6 :background ,war))))
  `(flycheck-error ((t (:foreground ,fgchroma6 :background ,err))))
  `(match ((t (:weight bold :foreground ,fgchroma6 :background ,bgchroma2))))
+ ;; multiple cursor highlight:
+ `(iedit-occurrence ((t (:background "cyan"))))
  `(next-error ((t (:inherit (region)))))
  `(query-replace ((t (:inherit (isearch)))))))
 

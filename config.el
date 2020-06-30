@@ -22,15 +22,18 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 24 :weight 'light))
+(setq doom-font (font-spec :family "Iosevka" :size 14 :weight 'light))
 ;; (setq doom-font (font-spec :family "Noto Serif" :size 24 :weight 'regular))
-(setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 24))
+(setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
 
 (setq doom-theme 'mono-dark)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
+(global-visual-line-mode t)
+
+(global-vi-tilde-fringe-mode nil)
 ;;(setq display-line-numbers-type nil)
 
 (custom-set-variables
