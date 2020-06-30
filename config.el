@@ -22,7 +22,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 24 :weight 'regular))
+(setq doom-font (font-spec :family "Iosevka" :size 24 :weight 'light))
 ;; (setq doom-font (font-spec :family "Noto Serif" :size 24 :weight 'regular))
 (setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 24))
 
@@ -158,4 +158,7 @@
 
 
 (setq evil-multiedit-follow-matches t)
-(define-key evil-normal-state-map (kbd "C-d") 'evil-multiedit-match-and-next)
+(define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+(define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
+(define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+(define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)

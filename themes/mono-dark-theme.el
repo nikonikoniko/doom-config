@@ -31,7 +31,8 @@
 		:family "default" 
 		:foundry "default" 
 		:width normal 
-		:height 1 
+		:height 2
+		:line-spacing 20
 		:weight normal 
 		:slant normal 
 		:underline nil 
@@ -53,7 +54,7 @@
  `(homoglyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
  `(minibuffer-prompt ((t (:foreground ,fgchroma5))))
  `(highlight ((t (:background ,bgchroma1))))
- `(region ((t (:foreground ,bgchroma2 :background ,fgchroma5))))
+ `(region ((t (:background "cyan"))))
  `(shadow ((t (:foreground ,bgchroma6))))
  `(secondary-selection ((t (:background ,bgchroma3))))
  `(trailing-whitespace ((t (:background ,err))))
@@ -102,7 +103,7 @@
  `(match ((t (:weight bold :foreground ,fgchroma6 :background ,bgchroma2))))
  `(next-error ((t (:inherit (region)))))
  ;; multiple cursor highlight:
- `(iedit-occurrence ((t (:background "green"))))
+ `(iedit-occurrence ((t (:background "cyan"))))
  `(query-replace ((t (:inherit (isearch)))))))
 
 (provide-theme 'mono-dark)
