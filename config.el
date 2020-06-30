@@ -155,3 +155,7 @@
       (eq xxx 1)
       (setq xxx 0)
       (load-theme 'mono-dark t))))
+
+
+(setq evil-multiedit-follow-matches t)
+(define-key evil-normal-state-map (kbd "C-d") 'evil-multiedit-match-and-next)

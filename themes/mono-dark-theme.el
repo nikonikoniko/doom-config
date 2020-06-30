@@ -101,6 +101,8 @@
  `(flycheck-error ((t (:foreground ,fgchroma6 :background ,err))))
  `(match ((t (:weight bold :foreground ,fgchroma6 :background ,bgchroma2))))
  `(next-error ((t (:inherit (region)))))
+ ;; multiple cursor highlight:
+ `(iedit-occurrence ((t (:background "green"))))
  `(query-replace ((t (:inherit (isearch)))))))
 
 (provide-theme 'mono-dark)

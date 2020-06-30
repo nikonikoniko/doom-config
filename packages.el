@@ -25,6 +25,7 @@
 ;; (package! html-mode)
 (package! web-mode)
 (package! company-org-roam)
+(package! evil-multiedit)
 (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
 ;;(package! load-theme-buffer-local :recipe
