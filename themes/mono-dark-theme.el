@@ -1,12 +1,12 @@
 (deftheme mono-dark
   "Created 2020-03-09.")
 
-(let ((bgchroma1 "#333")
-      (bgchroma2 "#444")
-      (bgchroma3 "#555")
-      (bgchroma4 "#666")
-      (bgchroma5 "#777")
-      (bgchroma6 "#888")
+(let ((bgchroma1 "#222")
+      (bgchroma2 "#333")
+      (bgchroma3 "#444")
+      (bgchroma4 "#555")
+      (bgchroma5 "#666")
+      (bgchroma6 "#777")
       (fgchroma1 "#aaa")
       (fgchroma2 "#bbb")
       (fgchroma3 "#ccc")
@@ -40,7 +40,7 @@
 		:box nil 
 		:inverse-video nil 
 		:foreground ,fgchroma4
-		:background "#444444" 
+		:background "#333" 
 		:stipple nil 
 		:inherit nil))))
  `(cursor ((t (:foreground ,fgchroma6 :background ,hlchroma3))))

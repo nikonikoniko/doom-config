@@ -64,6 +64,8 @@
 (add-hook 'web-mode-hook #'indent-force)
 (add-hook 'typescript-mode-hook #'indent-force)
 
+(setq tide-tsserver-executable "node_modules/typescript/bin/tsserver")
+
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
@@ -72,13 +74,19 @@
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
 	;; ADD THESE TO MAKE SURE THAT ESLINT RUNS BOTH IN TSX-TIDE and TYPESCRIPT-TIDE
-        (flycheck-add-mode 'javascript-eslint 'web-mode)
+	(flycheck-add-mode 'javascript-eslint 'web-mode)
+
+	;;; THESE FOR ESLINT ONLY
 	(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
-	(add-to-list 'flycheck-disabled-checkers 'typescript-tide)
-	(add-to-list 'flycheck-disabled-checkers 'tsx-tide)
+	(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+	(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 
+	;; (add-to-list 'flycheck-disabled-checkers 'typescript-tide)
+        ;; (add-to-list 'flycheck-disabled-checkers 'tsx-tide)
+
+	;; THESE FOR TSLINT ET ALL
 	;;(setq flycheck-disabled-checkers 'typescript-tslint 'tsx-tide)
-
+	;;(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
 	;;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
 	;;(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 	;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
@@ -90,7 +98,28 @@
           (lambda ()
             (when (string-equal "tsx" (file-name-extension buffer-file-name))
               (setup-tide-mode))))
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+
+;; the following files don't work because buffer-file-name is none
+(defun eslint-fix-file ()
+  (interactive)
+  (message "eslint --fixing the file" (buffer-file-name))
+  (shell-command (concat "eslint --fix " (buffer-file-name))))
+
+(defun eslint-fix-file-and-revert ()
+  (interactive)
+  (eslint-fix-file)
+  (revert-buffer t t))
+
+;; (add-hook 'js2-mode-hook
+;;           (lambda ()
+;;             (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
+;; 
+;; (add-hook 'web-mode-hook
+;;           (lambda ()
+;;             (add-hook 'after-save-hook #'eslint-fix-file-and-revert)))
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
