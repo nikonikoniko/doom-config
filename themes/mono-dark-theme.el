@@ -36,6 +36,7 @@
  `(line-number ((t (:foreground ,bgchroma3))))
  `(line-number-current-line ((t (:foreground ,bgchroma4 :background ,bgchroma1))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
+ `(window-divider ((t (:foreground "#222" :background "#222"))))
  `(fringe ((t (:background ,bgchroma2))))
  `(fixed-pitch ((t (:family "Monospace"))))
  `(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))

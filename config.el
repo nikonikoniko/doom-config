@@ -26,8 +26,6 @@
  ;; (setq doom-font (font-spec :family "Noto Serif" :size 14 :weight 'regular))
  (setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
 
-(setq doom-neotree-enable-variable-pitch nil)
-
 (setq doom-theme 'mono-dark)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
@@ -44,6 +42,11 @@
 ;; (setq prettify-symbols-unprettify-at-point t)
 ;; (global-prettify-symbols-mode t)
 
+(def-package-hook! doom-themes
+  :post-config
+  (remove-hook 'doom-load-theme-hook #'doom-themes-neotree-config)
+(setq neo-theme 'ascii)
+)
 
 
 
@@ -105,23 +108,30 @@
   (setq prettify-symbols-alist '(("lambda" . ?λ)
                                  ("->" . ?→)
                                  ("->>" . ?↠)
-                                 ("=>" . ?⟹)
-                                 ("map" . ?⟾)
-                                 (".map" . ?⟾)
+                                 ("=>" . ?⟹) ;; long fat arrow
+                                 ;;("=>" . ?→) ;; smaller math arrow
+                                 ("map" . ?⟾) ;; fat ended arrow
+                                 (".map" . ?⟾) 
+                                 ;; ("map" . ?↦) ;; thin ended arrow
                                  ("/=" . ?≠)
                                  ("!==" . ?≠)
                                  ("===" . ?≡)
                                  ("<=" . ?≤)
 				 ("number" . ?Z)
 				 ("string" . ?Σ)
+				 ("boolean" . ?B)
+				 ("curry" . ?∂)
+				 ("partial" . ?∂)
                                  (">=" . ?≥)
                                  ;;("=<<" . ?=≪)
                                  ;;(">>=" . ?≫=)
                                  ;;("<=<" . ?↢)
                                  ;;(">=>" . ?↣)
                                  ("&&" . ?∧)
+				 ("true" . ?⊤)
+				 ("false" . ?⊥)
                                  ("||" . ?∨)
-				 (" = " . (?  (Br . Bl) ?⸬ (Br . Bl) ? ))
+				 (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
 				 ("pipe" . (?⟹  (Br . Bl) ? ))
                                  ("not" . ?¬)))
 
@@ -193,8 +203,8 @@
       (setq xxx 0)
       (load-theme 'mono-dark t))))
 
-(defun lights-on () (load-theme 'mono-light t))
-(defun lights-off () (load-theme 'mono-dark t))
+(defun lights-on () (interactive) (load-theme 'mono-light t))
+(defun lights-off () (interactive) (load-theme 'mono-dark t))
 
 
 (setq evil-multiedit-follow-matches t)
