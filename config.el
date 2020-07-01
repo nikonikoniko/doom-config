@@ -22,9 +22,11 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Iosevka" :size 14 :weight 'light))
-;; (setq doom-font (font-spec :family "Noto Serif" :size 24 :weight 'regular))
-(setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
+  (setq doom-font (font-spec :family "Iosevka" :size 14 :weight 'light))
+ ;; (setq doom-font (font-spec :family "Noto Serif" :size 14 :weight 'regular))
+ (setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
+
+(setq doom-neotree-enable-variable-pitch nil)
 
 (setq doom-theme 'mono-dark)
 
@@ -39,10 +41,16 @@
 (custom-set-variables
   '(neo-window-position (quote right)))
 
-(use-package mixed-pitch
-  :hook
-  ;; If you want it in all text modes:
-  (text-mode . mixed-pitch-mode))
+;; (setq prettify-symbols-unprettify-at-point t)
+;; (global-prettify-symbols-mode t)
+
+
+
+
+;; (use-package mixed-pitch
+;;   :hook
+;;   ;; If you want it in all text modes:
+;;   (text-mode . mixed-pitch-mode))
  
 ;; (use-package! evil-terminal-cursor-changer
 ;;  :hook (tty-setup . evil-terminal-cursor-changer-activate))
@@ -93,6 +101,32 @@
 	;;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
 	;;(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 	;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
+
+  (setq prettify-symbols-alist '(("lambda" . ?λ)
+                                 ("->" . ?→)
+                                 ("->>" . ?↠)
+                                 ("=>" . ?⟹)
+                                 ("map" . ?⟾)
+                                 (".map" . ?⟾)
+                                 ("/=" . ?≠)
+                                 ("!==" . ?≠)
+                                 ("===" . ?≡)
+                                 ("<=" . ?≤)
+				 ("number" . ?Z)
+				 ("string" . ?Σ)
+                                 (">=" . ?≥)
+                                 ;;("=<<" . ?=≪)
+                                 ;;(">>=" . ?≫=)
+                                 ;;("<=<" . ?↢)
+                                 ;;(">=>" . ?↣)
+                                 ("&&" . ?∧)
+                                 ("||" . ?∨)
+				 (" = " . (?  (Br . Bl) ?⸬ (Br . Bl) ? ))
+				 ("pipe" . (?⟹  (Br . Bl) ? ))
+                                 ("not" . ?¬)))
+
+  (prettify-symbols-mode t)
+
 
 )
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
@@ -159,9 +193,14 @@
       (setq xxx 0)
       (load-theme 'mono-dark t))))
 
+(defun lights-on () (load-theme 'mono-light t))
+(defun lights-off () (load-theme 'mono-dark t))
+
 
 (setq evil-multiedit-follow-matches t)
 (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
 (define-key evil-visual-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
 (define-key evil-normal-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
 (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
+
+

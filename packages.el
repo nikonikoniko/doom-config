@@ -26,8 +26,9 @@
 (package! web-mode)
 (package! company-org-roam)
 (package! evil-multiedit)
-(package! mixed-pitch)
+;; (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
+(package! prettify-symbols-mode)
 ;;(package! load-theme-buffer-local :recipe
 ;;  (:host github :repo "nikonikoniko/color-theme-buffer-local"))
 
