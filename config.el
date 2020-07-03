@@ -39,15 +39,10 @@
 (custom-set-variables
   '(neo-window-position (quote right)))
 
+
+
 ;; (setq prettify-symbols-unprettify-at-point t)
 ;; (global-prettify-symbols-mode t)
-
-(def-package-hook! doom-themes
-  :post-config
-  (remove-hook 'doom-load-theme-hook #'doom-themes-neotree-config)
-(setq neo-theme 'ascii)
-)
-
 
 
 ;; (use-package mixed-pitch
@@ -105,6 +100,8 @@
 	;;(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 	;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
 
+	(setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
+	(font-lock-add-keywords nil my-font-lock-keywords)
   (setq prettify-symbols-alist '(("lambda" . ?λ)
                                  ("->" . ?→)
                                  ("->>" . ?↠)
@@ -120,7 +117,12 @@
 				 ("number" . ?Z)
 				 ("string" . ?Σ)
 				 ("boolean" . ?B)
+				 ("return" . ?⮩)
+				 ("Promise" . ?⧖)
+				 ("async" . ?⧖)
+				 ("await" . ?⧖)
 				 ("curry" . ?∂)
+				 ("void" . ?∅)
 				 ("partial" . ?∂)
                                  (">=" . ?≥)
                                  ;;("=<<" . ?=≪)
