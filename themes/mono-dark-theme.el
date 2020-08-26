@@ -1,12 +1,13 @@
 (deftheme mono-dark
   "Created 2020-03-09.")
 
-(let ((bgchroma1 "#222")
-      (bgchroma2 "#333")
-      (bgchroma3 "#444")
-      (bgchroma4 "#555")
-      (bgchroma5 "#666")
-      (bgchroma6 "#777")
+(let ((bgchroma1 "#333")
+      (bgchroma2 "#444")
+      (bgchroma3 "#555")
+      (bgchroma4 "#666")
+      (bgchroma5 "#777")
+      (bgchroma6 "#888")
+
       (fgchroma1 "#aaa")
       (fgchroma2 "#bbb")
       (fgchroma3 "#ccc")
@@ -24,19 +25,18 @@
       (obchroma2 "#ffdcbd")
       (obchroma3 "#ffdcbd"))
 
-
 (custom-theme-set-faces
  'mono-dark
  `(default ((t (
 		:foreground ,fgchroma4
-		:background "#333" 
+		:background ,bgchroma2 
 		:stipple nil 
 		:inherit nil))))
  `(cursor ((t (:foreground ,fgchroma6 :background ,hlchroma3))))
  `(line-number ((t (:foreground ,bgchroma3))))
  `(line-number-current-line ((t (:foreground ,bgchroma4 :background ,bgchroma1))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
- `(window-divider ((t (:foreground "#222" :background "#222"))))
+ `(window-divider ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
  `(fringe ((t (:background ,bgchroma2))))
  `(fixed-pitch ((t (:family "Monospace"))))
  `(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))

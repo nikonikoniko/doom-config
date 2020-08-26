@@ -1,12 +1,12 @@
 (deftheme mono-light
   "Created 2020-03-09.")
 
-(let ((bgchroma1 "#fff")
-      (bgchroma2 "#efefef")
-      (bgchroma3 "#ededed")
-      (bgchroma4 "#eee")
-      (bgchroma5 "#ddd")
-      (bgchroma6 "#bbb")
+(let ((bgchroma1 "#eee")
+      (bgchroma2 "#dfdfdf")
+      (bgchroma3 "#ddd")
+      (bgchroma4 "#bbb")
+      (bgchroma5 "#aaa")
+      (bgchroma6 "#999")
 
       (fgchroma1 "#111")
       (fgchroma2 "#222")
@@ -48,7 +48,7 @@
  `(escape-glyph ((t (:weight bold :foreground ,fgchroma6))))
  `(homoglyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
  `(minibuffer-prompt ((t (:foreground ,fgchroma5))))
- `(highlight ((t (:background ,bgchroma1))))
+ `(highlight ((t (:background ,bgchroma3))))
  `(region ((t (:foreground ,bgchroma2 :background ,fgchroma5))))
  `(shadow ((t (:foreground ,fgchroma6))))
  `(secondary-selection ((t (:background ,bgchroma3))))
