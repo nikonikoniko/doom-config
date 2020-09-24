@@ -83,7 +83,7 @@
  `(header-line ((t (:inherit (mode-line)))))
  `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,bgchroma1 :background ,inf)) (t (:inherit (variable-pitch)))))
  `(mode-line ((t (:box nil :foreground ,fgchroma2 :background ,bgchroma1))))
- `(mode-line-buffer-id ((t (:weight bold :foreground ,bgchroma2))))
+ `(mode-line-buffer-id ((t (:weight bold :foreground ,fgchroma6))))
  `(mode-line-emphasis ((t (:weight bold))))
  `(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color ,bgchroma3 :style released-button))) (t (:inherit (highlight)))))
  `(mode-line-inactive ((t (:box nil :foreground ,fgchroma2 :background ,bgchroma5))))

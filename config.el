@@ -39,7 +39,10 @@
 ;;(setq display-line-numbers-type nil)
 
 (custom-set-variables
-  '(neo-window-position (quote right)))
+  '(neo-window-position (quote right))
+  '(neo-window-fixed-size nil)
+  '(neo-smart-open t)
+  )
 
 
 
@@ -235,3 +238,17 @@
 (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
 
 
+(dolist (fn '(definition references))
+  (fset (intern (format "+lookup/%s-other-window" fn))
+        (lambda (identifier &optional arg)
+          "TODO"
+          (interactive (list (doom-thing-at-point-or-region)
+                             current-prefix-arg))
+          (let ((pt (point)))
+            (switch-to-buffer-other-window (current-buffer))
+            (goto-char pt)
+            (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
+
+(map! :leader
+      :desc "jump to definition"
+      "c d" #'+lookup/definition-other-window)
