@@ -23,17 +23,21 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
-(setq doom-font (font-spec :family "Iosevka Term" :size 13 :weight 'light))
+;; (setq doom-font (font-spec :family "Iosevka Term" :size 13 :weight 'light))
+(setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
+(setq-default line-spacing 0.1)
 ;; (setq doom-font (font-spec :family "Source Code Pro" :size 16))
  ;; (setq doom-font (font-spec :family "Noto Serif" :size 14 :weight 'regular))
  (setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
 
-(setq doom-theme 'mono-dark)
+(setq doom-theme 'mono-light)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type nil)
 (global-visual-line-mode nil)
+
+(blink-cursor-mode t)
 
 (global-vi-tilde-fringe-mode nil)
 ;;(setq display-line-numbers-type nil)
@@ -114,14 +118,14 @@
                                  ("->>" . ?↠)
                                  ("=>" . ?⟹) ;; long fat arrow
                                  ;;("=>" . ?→) ;; smaller math arrow
-                                 ("map" . ?⟾) ;; fat ended arrow
-                                 (".map" . ?⟾) 
+                                 ;;("map" . ?⟾) ;; fat ended arrow
+                                 ;;(".map" . ?⟾) 
                                  ;; ("map" . ?↦) ;; thin ended arrow
                                  ("/=" . ?≠)
                                  ("!==" . ?≠)
                                  ("===" . ?≡)
                                  ("<=" . ?≤)
-				 ("if" . ??)
+				 ;; ("if" . ??)
 				 ;; ("const" . ?●) dot
 				 ;; ("import" . ?●)
 				 ;; ("from" . ?●)
@@ -134,14 +138,14 @@
 				 ("number" . ?Z)
 				 ("string" . ?Σ)
 				 ("boolean" . ?B)
-				 ("function" . ?Ƒ)
+				 ;; ("function" . ?Ƒ)
 				 ;; ("import" . ?⭆) ;; tripple arrow import
-				 ("export" . ?←)
+				 ;; ("export" . ?←)
 				 ;; ("return" . ?⮩)
 				 ("return" . ?↳)
-				 ("Promise" . ?∞)
-				 ("async" . ?∞)
-				 ("await" . ?∞)
+				 ;; ("Promise" . ?∞)
+				 ;; ("async" . ?∞)
+				 ;; ("await" . ?∞)
 				 ("curry" . ?∂)
 				 ("void" . ?∅)
 				 ("partial" . ?∂)
@@ -155,8 +159,8 @@
 				 ("true" . ?⊤)
 				 ("false" . ?⊥)
                                  ("||" . ?∨)
-				 (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
-				 ("pipe" . (?⟹  (Br . Bl) ? ))
+				 ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
+				 ;; ("pipe" . (?⟹  (Br . Bl) ? ))
                                  ("not" . ?¬)))
 
   (prettify-symbols-mode t)
