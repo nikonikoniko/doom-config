@@ -28,12 +28,12 @@
 (package! evil-multiedit)
 ;; (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
-(package! prettify-symbols-mode)
+;; (package! prettify-symbols-mode)
 ;;(package! load-theme-buffer-local :recipe
 ;;  (:host github :repo "nikonikoniko/color-theme-buffer-local"))
 
-(package! load-theme-buffer-local :disable t)
-(package! color-theme-buffer-local :disable t)
+;; (package! load-theme-buffer-local :disable t)
+;; (package! color-theme-buffer-local :disable t)
 
 ;; To install a package directly from a particular repo, you'll need to specify
 ;; a `:recipe'. You'll find documentation on what `:recipe' accepts here:

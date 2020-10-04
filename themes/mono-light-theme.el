@@ -2,18 +2,19 @@
   "Created 2020-03-09.")
 
 (let ((bgchroma1 "#fff")
-      (bgchroma2 "#e6e6e6")
-      (bgchroma3 "#ddd")
-      (bgchroma4 "#ccc")
-      (bgchroma5 "#bbb")
-      (bgchroma6 "#aaa")
+      ;; why is fff not white ?
+      (bgchroma2 "white")
+      (bgchroma3 "#e6e6e6")
+      (bgchroma4 "#ddd")
+      (bgchroma5 "#ccc")
+      (bgchroma6 "#bbb")
 
-      (fgchroma1 "#000")
-      (fgchroma2 "#111")
-      (fgchroma3 "#222")
-      (fgchroma4 "#333")
-      (fgchroma5 "#444")
-      (fgchroma6 "#555")
+      (fgchroma1 "#111")
+      (fgchroma2 "#222")
+      (fgchroma3 "#333")
+      (fgchroma4 "#666")
+      (fgchroma5 "#777")
+      (fgchroma6 "#999")
 
       (err "orangered")
       (war "yellow")
@@ -34,7 +35,7 @@
 (custom-theme-set-faces
  'mono-light
  `(default ((t (
-		:foreground ,fgchroma4
+		:foreground ,fgchroma3
 		:background ,bgchroma2
 		:stipple nil 
 		:inherit nil))))
@@ -42,12 +43,13 @@
  `(line-number ((t (:foreground ,bgchroma4))))
  `(line-number-current-line ((t (:foreground ,bgchroma6 :background ,bgchroma1))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
- `(window-divider ((t (:foreground "#eee" :background "#eee"))))
+ ;; tiny little line between windows
+ `(window-divider ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
  `(fringe ((t (:background ,bgchroma2))))
  `(fixed-pitch ((t (:family "Monospace"))))
- `(neo-dir-link-face ((t (:family "Iosevka"))))
- `(neo-file-link-face ((t (:family "Monospace"))))
- `(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
+ ;; `(neo-dir-link-face ((t (:family "Iosevka"))))
+ ;; `(neo-file-link-face ((t (:family "Monospace"))))
+ ;; `(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
  `(escape-glyph ((t (:weight bold :foreground ,fgchroma6))))
  `(homoglyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
  `(minibuffer-prompt ((t (:foreground ,fgchroma5))))
@@ -60,20 +62,22 @@
  `(trailing-whitespace ((t (:background ,err))))
  `(font-lock-builtin-face ((t (:foreground ,bgchroma6))))
  `(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
- `(font-lock-comment-face ((t (:foreground ,comment :weight normal :slant italic))))
+ `(font-lock-comment-face ((t (:foreground ,comment :slant italic))))
  `(font-lock-constant-face ((t (:foreground ,obchroma1))))
  `(font-lock-doc-face ((t (:foreground ,fgchroma3))))
- `(font-lock-function-name-face ((t (:foreground ,fgchroma6))))
+ ;; functions both when they are used, not defined
+ `(font-lock-function-name-face ((t (:foreground ,fgchroma4 :slant italic))))
+ `(web-mode-function-call-face ((t (:foreground ,fgchroma4 :slant italic))))
  ;; `(font-lock-function-name-face ((t (:weight bold :foreground "#fff"))))
- `(font-lock-variable-name-face ((t (:foreground ,fgchroma1 :weight normal))))
- `(web-mode-variable-name-face ((t (:foreground ,fgchroma1 :weight normal))))
+ `(font-lock-variable-name-face ((t (:foreground ,fgchroma1))))
+ `(web-mode-variable-name-face ((t (:foreground ,fgchroma1))))
  `(nxml-element-local-name ((t (:foreground ,bgchroma6))))
  `(nxml-tag-delimiter ((t (:foreground ,bgchroma5))))
  `(web-mode-html-tag-bracket-face ((t (:foreground ,bgchroma5))))
  `(nxml-text ((t (:foreground ,bgchroma6))))
  `(js2-object-property ((t (:slant italic :foreground ,fgchroma6))))
  `(js2-function-param ((t (:foreground ,fgchroma6))))
- `(font-lock-keyword-face ((t (:foreground ,bgchroma6))))
+ `(font-lock-keyword-face ((t (:foreground ,fgchroma6))))
  `(font-lock-negation-char-face ((t (:weight bold :foreground ,fgchroma6))))
  `(font-lock-preprocessor-face ((t (:foreground ,fgchroma6))))
  `(font-lock-regexp-grouping-backslash ((t (:weight bold :foreground ,fgchroma5))))
@@ -99,8 +103,8 @@
  `(flycheck-warning-overlay ((t (:foreground ,fgchroma6 :background ,war))))
  `(flycheck-info-overlay ((t (:underline ,inf :background ,inf))))
  `(flycheck-info ((t (:underline ,inf :background ,inf))))
- `(flycheck-warning ((t (:foreground ,fgchroma6 :background ,war))))
- `(flycheck-error ((t (:foreground ,fgchroma6 :background ,err))))
+ `(flycheck-warning ((t (:foreground ,fgchroma3 :background ,war))))
+ `(flycheck-error ((t (:foreground ,fgchroma3 :background ,err))))
  `(match ((t (:weight bold :foreground ,fgchroma6 :background ,bgchroma2))))
  ;; multiple cursor highlight:
  `(iedit-occurrence ((t (:background "cyan"))))
@@ -108,6 +112,26 @@
  `(rainbow-delimiters-depth-1-face ((t (:foreground ,bgchroma5))))
  `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma6))))
  `(rainbow-delimiters-depth-3-face ((t (:foreground ,fgchroma6))))
+
+`(org-block ((t (:inherit fixed-pitch :height 1.0 :background ,bgchroma2))))
+`(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma3 :background ,bgchroma2))))
+
+`(org-document-title ((t (:height 2.0 :weight bold :underline t :background "beige"))))
+`(org-document-info-keyword ((t (underline t :background "beige"))))
+
+`(org-level-1 ((t (:height 1.8 :weight bold))))
+`(org-level-2 ((t (:height 1.5 :weight bold))))
+`(org-level-3 ((t (:height 1.3 :weight bold))))
+`(org-level-4 ((t (:height 1.2 :weight bold))))
+`(org-level-5 ((t (:height 1.1 :weight bold))))
+`(org-table ((t (:inherit fixed-pitch))))
+`(org-document-info ((t (:foreground "dark orange"))))
+`(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
+`(org-property-value ((t (:inherit fixed-pitch))) t)
+`(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+`(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+`(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+
  `(query-replace ((t (:inherit (isearch)))))))
 
 (provide-theme 'mono-light)

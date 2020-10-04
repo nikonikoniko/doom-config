@@ -23,12 +23,22 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
-;; (setq doom-font (font-spec :family "Iosevka Term" :size 13 :weight 'light))
-(setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
-(setq-default line-spacing 0.1)
+ (setq doom-font (font-spec :family "iosevka fixed ss01" :size 18 :weight 'light))
+;; (setq doom-font (font-spec :family "Iosevka Term" :size 18))
+;; (setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
+;; (setq doom-font (font-spec :family "IBM 3270" :size 18))
 ;; (setq doom-font (font-spec :family "Source Code Pro" :size 16))
- ;; (setq doom-font (font-spec :family "Noto Serif" :size 14 :weight 'regular))
- (setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
+
+ (setq doom-variable-pitch-font (font-spec :family "Noto Serif" :size 18 :weight 'light))
+;; (setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
+
+;; (add-hook 'org-mode-hook (lambda () (set-frame-font "Noto Serif Light" t)))
+
+(add-hook 'org-mode-hook (lambda ()
+                            (setq buffer-face-mode-face '(:family "Source Serif Pro"))
+                            ;; (setq buffer-face-mode-face '(:family "DejaVu Serif Condensed"))
+                            (buffer-face-mode t)
+			    ))
 
 (setq doom-theme 'mono-light)
 
@@ -38,6 +48,8 @@
 (global-visual-line-mode nil)
 
 (blink-cursor-mode t)
+(setq text-scale-mode-step 1.1)
+(setq-default line-spacing 0.05)
 
 (global-vi-tilde-fringe-mode nil)
 ;;(setq display-line-numbers-type nil)
@@ -53,12 +65,6 @@
 ;; (setq prettify-symbols-unprettify-at-point t)
 ;; (global-prettify-symbols-mode t)
 
-
-;; (use-package mixed-pitch
-;;   :hook
-;;   ;; If you want it in all text modes:
-;;   (text-mode . mixed-pitch-mode))
- 
 ;; (use-package! evil-terminal-cursor-changer
 ;;  :hook (tty-setup . evil-terminal-cursor-changer-activate))
 
@@ -113,59 +119,59 @@
 
 	(setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
 	(font-lock-add-keywords nil my-font-lock-keywords)
-  (setq prettify-symbols-alist '(("lambda" . ?λ)
-                                 ("->" . ?→)
-                                 ("->>" . ?↠)
-                                 ("=>" . ?⟹) ;; long fat arrow
-                                 ;;("=>" . ?→) ;; smaller math arrow
-                                 ;;("map" . ?⟾) ;; fat ended arrow
-                                 ;;(".map" . ?⟾) 
-                                 ;; ("map" . ?↦) ;; thin ended arrow
-                                 ("/=" . ?≠)
-                                 ("!==" . ?≠)
-                                 ("===" . ?≡)
-                                 ("<=" . ?≤)
-				 ;; ("if" . ??)
-				 ;; ("const" . ?●) dot
-				 ;; ("import" . ?●)
-				 ;; ("from" . ?●)
-				 ;; ("const " . ?●)
-				 ("import" . ?_)
-				 ("from " . ?_)
-				 ;; ("const" . ?○)
-				 ;;  ("import" . ?○)
-				 ;; ("from" . ?○)
-				 ("number" . ?Z)
-				 ("string" . ?Σ)
-				 ("boolean" . ?B)
-				 ;; ("function" . ?Ƒ)
-				 ;; ("import" . ?⭆) ;; tripple arrow import
-				 ;; ("export" . ?←)
-				 ;; ("return" . ?⮩)
-				 ("return" . ?↳)
-				 ;; ("Promise" . ?∞)
-				 ;; ("async" . ?∞)
-				 ;; ("await" . ?∞)
-				 ("curry" . ?∂)
-				 ("void" . ?∅)
-				 ("partial" . ?∂)
-				 ("Partial" . ?∂)
-                                 (">=" . ?≥)
-                                 ;;("=<<" . ?=≪)
-                                 ;;(">>=" . ?≫=)
-                                 ;;("<=<" . ?↢)
-                                 ;;(">=>" . ?↣)
-                                 ("&&" . ?∧)
-				 ("true" . ?⊤)
-				 ("false" . ?⊥)
-                                 ("||" . ?∨)
-				 ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
-				 ;; ("pipe" . (?⟹  (Br . Bl) ? ))
-                                 ("not" . ?¬)))
-
-  (prettify-symbols-mode t)
-
-
+;;   (setq prettify-symbols-alist '(("lambda" . ?λ)
+;;                                  ("->" . ?→)
+;;                                  ("->>" . ?↠)
+;;                                  ("=>" . ?⟹) ;; long fat arrow
+;;                                  ;;("=>" . ?→) ;; smaller math arrow
+;;                                  ;;("map" . ?⟾) ;; fat ended arrow
+;;                                  ;;(".map" . ?⟾) 
+;;                                  ;; ("map" . ?↦) ;; thin ended arrow
+;;                                  ("/=" . ?≠)
+;;                                  ("!==" . ?≠)
+;;                                  ("===" . ?≡)
+;;                                  ("<=" . ?≤)
+;; 				 ;; ("if" . ??)
+;; 				 ;; ("const" . ?●) dot
+;; 				 ;; ("import" . ?●)
+;; 				 ;; ("from" . ?●)
+;; 				 ;; ("const " . ?●)
+;; 				 ("import" . ?_)
+;; 				 ("from " . ?_)
+;; 				 ;; ("const" . ?○)
+;; 				 ;;  ("import" . ?○)
+;; 				 ;; ("from" . ?○)
+;; 				 ("number" . ?Z)
+;; 				 ("string" . ?Σ)
+;; 				 ("boolean" . ?B)
+;; 				 ;; ("function" . ?Ƒ)
+;; 				 ;; ("import" . ?⭆) ;; tripple arrow import
+;; 				 ;; ("export" . ?←)
+;; 				 ;; ("return" . ?⮩)
+;; 				 ("return" . ?↳)
+;; 				 ;; ("Promise" . ?∞)
+;; 				 ;; ("async" . ?∞)
+;; 				 ;; ("await" . ?∞)
+;; 				 ("curry" . ?∂)
+;; 				 ("void" . ?∅)
+;; 				 ("partial" . ?∂)
+;; 				 ("Partial" . ?∂)
+;;                                  (">=" . ?≥)
+;;                                  ;;("=<<" . ?=≪)
+;;                                  ;;(">>=" . ?≫=)
+;;                                  ;;("<=<" . ?↢)
+;;                                  ;;(">=>" . ?↣)
+;;                                  ("&&" . ?∧)
+;; 				 ("true" . ?⊤)
+;; 				 ("false" . ?⊥)
+;;                                  ("||" . ?∨)
+;; 				 ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
+;; 				 ;; ("pipe" . (?⟹  (Br . Bl) ? ))
+;;                                  ("not" . ?¬)))
+;; 
+;;   (prettify-symbols-mode t)
+;; 
+;; 
 )
 (add-hook 'typescript-mode-hook #'setup-tide-mode)
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
@@ -256,3 +262,51 @@
 (map! :leader
       :desc "jump to definition"
       "c d" #'+lookup/definition-other-window)
+
+
+(setq org-roam-buffer-window-parameters '((no-delete-other-windows . t))) 
+
+(map! :leader
+      :desc "roam jump to todo todo"
+      "r t"
+      (lambda ()
+	(interactive)
+	(org-roam) ;; open the org roam buffer
+	(execute-kbd-macro [?\M-x ?o ?r ?g ?- ?r ?o ?a ?m ?- ?f ?i ?n ?d ?- ?f ?i ?l ?e return ?t ?o ?d ?o return]) ;; hack this stuff because i don;t know how to do it otherwise
+	))
+
+(map! :leader
+      :desc "today"
+      "r d"
+      (lambda ()
+	(interactive)
+	(org-roam-dailies-today)))
+
+
+(map! :leader
+      :desc "yesterday"
+      "r y"
+      (lambda ()
+	(interactive)
+	(org-roam-dailies-yesterday)))
+
+(map! :leader
+      :desc "biffer"
+      "r r"
+      (lambda ()
+	(interactive)
+	(org-roam)))
+
+(map! :leader
+      :desc "biffer"
+      "r f"
+      (lambda ()
+	(interactive)
+	(org-roam-find-file)))
+
+
+   (set-face-attribute 'org-roam-link nil
+                          :foreground "cadetblue"
+                          )
+
+(setq org-link-frame-setup '((file . find-file-other-window)) )
