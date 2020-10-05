@@ -4,7 +4,7 @@
 (let ((bgchroma1 "#fff")
       ;; why is fff not white ?
       (bgchroma2 "#f9f9f9")
-      (bgchroma3 "#e6e6e6")
+      (bgchroma3 "#f5f5f5")
       (bgchroma4 "#dddddd")
       (bgchroma5 "#cccccc")
       (bgchroma6 "#bbbbbb")
@@ -43,9 +43,11 @@
  `(line-number ((t (:foreground ,bgchroma4))))
  `(line-number-current-line ((t (:foreground ,bgchroma6 :background ,bgchroma1))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
+
  ;; tiny little line between windows
- `(window-divider ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
- `(fringe ((t (:background ,bgchroma2))))
+ `(window-divider ((t (:foreground ,bgchroma3 :background ,bgchroma3))))
+ `(fringe ((t (:background ,bgchroma3))))
+
  `(fixed-pitch ((t (:family "Monospace"))))
  ;; `(neo-dir-link-face ((t (:family "Iosevka"))))
  ;; `(neo-file-link-face ((t (:family "Monospace"))))
@@ -93,11 +95,12 @@
  `(header-line ((t (:inherit (mode-line)))))
  `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,bgchroma1 :background ,inf)) (t (:inherit (variable-pitch)))))
 
- `(mode-line ((t (:box nil :foreground ,bgchroma2 :background "orange"))))
- `(mode-line-buffer-id ((t (:weight bold :foreground ,fgchroma1))))
- `(mode-line-emphasis ((t (:weight bold))))
- `(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color ,bgchroma3 :style released-button))) (t (:inherit (highlight)))))
- `(mode-line-inactive ((t (:box nil :foreground ,fgchroma2 :background ,bgchroma5))))
+ `(mode-line          ((t (:height 80 :box nil :foreground ,fgchroma6 :background ,bgchroma2))))
+ `(mode-line-inactive ((t (:height 80 :box nil :foreground ,fgchroma2 :background ,bgchroma3))))
+
+ `(mode-line-buffer-id ((t (:foreground ,fgchroma1))))
+ ;; `(mode-line-emphasis ((t (:weight bold))))
+ `(mode-line-highlight ((((class color) (min-colors 88)) ) ))
 
  `(isearch ((t (:background ,hlchroma2))))
  `(isearch-fail ((t (:foreground ,fgchroma6 :background ,war))))
@@ -115,8 +118,8 @@
  `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma6))))
  `(rainbow-delimiters-depth-3-face ((t (:foreground ,fgchroma6))))
 
-`(org-block ((t (:inherit fixed-pitch :height 1.0 :background "white"))))
-`(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma3 :background ,bgchroma2))))
+`(org-block ((t (:inherit fixed-pitch :height 1.0))))
+`(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma4))))
 
 `(org-link ((t (underline t :background "beige"))))
 `(org-roam-link ((t (underline t :background "beige" :foreground "cadetblue"))))
@@ -125,7 +128,7 @@
 ;;`(org-hide ((t (underline t :background "white" ))))
 
 `(org-document-title ((t (:height 1.6 :weight bold :underline t))))
-`(org-document-info-keyword ((t (underline t :background "white"))))
+`(org-document-info-keyword ((t (underline t :foreground ,bgchroma6))))
 
 `(org-level-1 ((t (:height 1.5 :weight regular))))
 `(org-level-2 ((t (:height 1.4 :weight regular))))
@@ -140,7 +143,7 @@
 `(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
 `(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
 
-`(auto-dim-other-buffers-face ((t (:background "cadetblue"))))
+`(auto-dim-other-buffers-face ((t (:background ,bgchroma3))))
 
  `(query-replace ((t (:inherit (isearch)))))))
 

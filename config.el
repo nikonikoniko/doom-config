@@ -23,7 +23,7 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
- (setq doom-font (font-spec :family "iosevka fixed ss01" :size 16 :weight 'light))
+ (setq doom-font (font-spec :family "iosevka fixed ss01" :size 15 :weight 'light))
 ;; (setq doom-font (font-spec :family "Iosevka Term" :size 18))
 ;; (setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
 ;; (setq doom-font (font-spec :family "IBM 3270" :size 18))
@@ -51,7 +51,6 @@
 (setq text-scale-mode-step 1.1)
 (setq-default line-spacing 0.05)
 
-(global-vi-tilde-fringe-mode nil)
 ;;(setq display-line-numbers-type nil)
 
 (custom-set-variables
@@ -69,12 +68,7 @@
 ;;  :hook (tty-setup . evil-terminal-cursor-changer-activate))
 
 (require 'web-mode)
-
-;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-(defun indent-force ()
-  	(setq typescript-indent-level 2)
+	(setq typescript-indent-level 2)
 	(setq js-indent-level 2)
 	(setq js2-indent-level 2)
 	(setq javascript-indent-level 2)
@@ -84,12 +78,35 @@
 	(setq web-mode-markup-indent-offset 2)
   	(setq web-mode-css-indent-offset 2)
   	(setq web-mode-code-indent-offset 2)
-	)
-(add-hook 'web-mode-hook #'indent-force)
-(add-hook 'typescript-mode-hook #'indent-force)
-(add-hook 'js2-mode-hook #'indent-force)
-(add-hook 'rjsx-mode-hook #'indent-force)
+  	(setq react-indent-level 2)
+	(setq web-mode-script-padding 2)
 
+;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+;; these hooks dont seem to wrk any more
+;; (defun indent-force ()
+;;   	(setq typescript-indent-level 2)
+;; 	(setq js-indent-level 2)
+;; 	(setq js2-indent-level 2)
+;; 	(setq javascript-indent-level 2)
+;; 	(setq js2-basic-offset 2)
+;; 	(setq web-mode-markup-indent-offset 2)
+;; 	(setq indent-tabs-mode nil)
+;; 	(setq web-mode-markup-indent-offset 2)
+;;   	(setq web-mode-css-indent-offset 2)
+;;   	(setq web-mode-code-indent-offset 2)
+;;   	(setq react-indent-level 2)
+;; 	  (setq web-mode-script-padding 2)
+;; 	)
+;; ;; these hooks don't seem to woek any more
+;; (add-hook 'web-mode-hook #'indent-force)
+;; (add-hook 'typescript-mode-hook #'indent-force)
+;; (add-hook 'js2-mode-hook #'indent-force)
+;; (add-hook 'rjsx-mode-hook #'indent-force)
+;; 
+
+;; use the local project TS server instead of the global one
 (setq tide-tsserver-executable "node_modules/typescript/bin/tsserver")
 
 (defun setup-tide-mode ()
@@ -118,7 +135,7 @@
 	;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
 
 	;; (setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
-	(font-lock-add-keywords nil my-font-lock-keywords)
+	;; (font-lock-add-keywords nil my-font-lock-keywords)
 ;;   (setq prettify-symbols-alist '(("lambda" . ?λ)
 ;;                                  ("->" . ?→)
 ;;                                  ("->>" . ?↠)
@@ -173,13 +190,19 @@
 ;; 
 ;; 
 )
-(add-hook 'typescript-mode-hook #'setup-tide-mode)
-(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
-(add-hook 'web-mode-hook
-          (lambda ()
-            (when (string-equal "tsx" (file-name-extension buffer-file-name))
-              (setup-tide-mode))))
 
+(add-hook 'typescript-mode-hook #'setup-tide-mode)
+
+(add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
+
+
+(add-hook 'web-mode-hook #'setup-tide-mode)
+;; since emacs 27 this does not woek any more
+;; (add-hook 'web-mode-hook
+;;           (lambda ()
+;;             (when (string-equal "tsx" (file-name-extension buffer-file-name))
+;;               (setup-tide-mode))))
+;; 
 
 
 ;; the following files don't work because buffer-file-name is none
@@ -248,6 +271,9 @@
 (define-key evil-visual-state-map (kbd "M-D") 'evil-multiedit-match-and-prev)
 
 
+;;
+;;   code lookup always open in other window
+;;
 (dolist (fn '(definition references))
   (fset (intern (format "+lookup/%s-other-window" fn))
         (lambda (identifier &optional arg)
@@ -269,7 +295,10 @@
 ;;
 
 
-(setq org-roam-buffer-window-parameters '((no-delete-other-windows . t))) 
+(setq org-roam-buffer-window-parameters '(
+					  (no-delete-other-windows . t)
+					  )) 
+(setq org-roam-buffer-width 0.15)
 
 (map! :leader
       :desc "roam jump to todo todo"
@@ -323,6 +352,8 @@
    ;;                       )
 
 (setq org-link-frame-setup '((file . find-file-other-window)) )
+
+;; set images smaller
 (setq org-image-actual-width (/ (display-pixel-width) 3))
 
 ;; (setq auto-dim-other-buffers-face '(:background "#ddd"))
@@ -331,3 +362,10 @@
 (add-hook 'after-init-hook (lambda ()
   (when (fboundp 'auto-dim-other-buffers-mode)
     (auto-dim-other-buffers-mode t))))
+
+(setq-default
+ left-margin-width 1
+ right-margin-width 1)
+
+(setq doom-modeline-buffer-state-icon 0)
+(setq doom-modeline-icon nil)
