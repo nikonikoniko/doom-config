@@ -3,11 +3,11 @@
 
 (let ((bgchroma1 "#fff")
       ;; why is fff not white ?
-      (bgchroma2 "white")
+      (bgchroma2 "#f9f9f9")
       (bgchroma3 "#e6e6e6")
-      (bgchroma4 "#ddd")
-      (bgchroma5 "#ccc")
-      (bgchroma6 "#bbb")
+      (bgchroma4 "#dddddd")
+      (bgchroma5 "#cccccc")
+      (bgchroma6 "#bbbbbb")
 
       (fgchroma1 "#111")
       (fgchroma2 "#222")
@@ -92,11 +92,13 @@
  `(fringe ((t (:foreground ,fgchroma1 :background ,bgchroma4))))
  `(header-line ((t (:inherit (mode-line)))))
  `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,bgchroma1 :background ,inf)) (t (:inherit (variable-pitch)))))
- `(mode-line ((t (:box nil :foreground ,fgchroma2 :background ,bgchroma1))))
- `(mode-line-buffer-id ((t (:weight bold :foreground ,fgchroma6))))
+
+ `(mode-line ((t (:box nil :foreground ,bgchroma2 :background "orange"))))
+ `(mode-line-buffer-id ((t (:weight bold :foreground ,fgchroma1))))
  `(mode-line-emphasis ((t (:weight bold))))
  `(mode-line-highlight ((((class color) (min-colors 88)) (:box (:line-width 2 :color ,bgchroma3 :style released-button))) (t (:inherit (highlight)))))
  `(mode-line-inactive ((t (:box nil :foreground ,fgchroma2 :background ,bgchroma5))))
+
  `(isearch ((t (:background ,hlchroma2))))
  `(isearch-fail ((t (:foreground ,fgchroma6 :background ,war))))
  `(lazy-highlight ((t (:weight bold :foreground ,fgchroma6 :background ,bgchroma4))))
@@ -113,17 +115,23 @@
  `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma6))))
  `(rainbow-delimiters-depth-3-face ((t (:foreground ,fgchroma6))))
 
-`(org-block ((t (:inherit fixed-pitch :height 1.0 :background ,bgchroma2))))
+`(org-block ((t (:inherit fixed-pitch :height 1.0 :background "white"))))
 `(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma3 :background ,bgchroma2))))
 
-`(org-document-title ((t (:height 2.0 :weight bold :underline t :background "beige"))))
-`(org-document-info-keyword ((t (underline t :background "beige"))))
+`(org-link ((t (underline t :background "beige"))))
+`(org-roam-link ((t (underline t :background "beige" :foreground "cadetblue"))))
 
-`(org-level-1 ((t (:height 1.8 :weight bold))))
-`(org-level-2 ((t (:height 1.5 :weight bold))))
-`(org-level-3 ((t (:height 1.3 :weight bold))))
-`(org-level-4 ((t (:height 1.2 :weight bold))))
-`(org-level-5 ((t (:height 1.1 :weight bold))))
+`(org-drawer ((t (underline t :background "white"))))
+;;`(org-hide ((t (underline t :background "white" ))))
+
+`(org-document-title ((t (:height 1.6 :weight bold :underline t))))
+`(org-document-info-keyword ((t (underline t :background "white"))))
+
+`(org-level-1 ((t (:height 1.5 :weight regular))))
+`(org-level-2 ((t (:height 1.4 :weight regular))))
+`(org-level-3 ((t (:height 1.3 :weight regular))))
+`(org-level-4 ((t (:height 1.2 :weight regular))))
+`(org-level-5 ((t (:height 1.1 :weight regular))))
 `(org-table ((t (:inherit fixed-pitch))))
 `(org-document-info ((t (:foreground "dark orange"))))
 `(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
@@ -131,6 +139,8 @@
 `(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
 `(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
 `(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
+
+`(auto-dim-other-buffers-face ((t (:background "cadetblue"))))
 
  `(query-replace ((t (:inherit (isearch)))))))
 

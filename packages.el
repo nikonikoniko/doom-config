@@ -26,6 +26,8 @@
 (package! web-mode)
 (package! company-org-roam)
 (package! evil-multiedit)
+
+(package! auto-dim-other-buffers)
 ;; (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
 ;; (package! prettify-symbols-mode)

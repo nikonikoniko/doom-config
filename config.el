@@ -23,7 +23,7 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
- (setq doom-font (font-spec :family "iosevka fixed ss01" :size 18 :weight 'light))
+ (setq doom-font (font-spec :family "iosevka fixed ss01" :size 16 :weight 'light))
 ;; (setq doom-font (font-spec :family "Iosevka Term" :size 18))
 ;; (setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
 ;; (setq doom-font (font-spec :family "IBM 3270" :size 18))
@@ -35,7 +35,7 @@
 ;; (add-hook 'org-mode-hook (lambda () (set-frame-font "Noto Serif Light" t)))
 
 (add-hook 'org-mode-hook (lambda ()
-                            (setq buffer-face-mode-face '(:family "Source Serif Pro"))
+                            (setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
                             ;; (setq buffer-face-mode-face '(:family "DejaVu Serif Condensed"))
                             (buffer-face-mode t)
 			    ))
@@ -117,7 +117,7 @@
 	;;(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 	;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
 
-	(setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
+	;; (setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
 	(font-lock-add-keywords nil my-font-lock-keywords)
 ;;   (setq prettify-symbols-alist '(("lambda" . ?λ)
 ;;                                  ("->" . ?→)
@@ -256,12 +256,17 @@
                              current-prefix-arg))
           (let ((pt (point)))
             (switch-to-buffer-other-window (current-buffer))
-            (goto-char pt)
+            ;; (goto-char pt)
             (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
 
 (map! :leader
       :desc "jump to definition"
       "c d" #'+lookup/definition-other-window)
+
+;;
+;;
+;;   Org-Roam 
+;;
 
 
 (setq org-roam-buffer-window-parameters '((no-delete-other-windows . t))) 
@@ -271,24 +276,32 @@
       "r t"
       (lambda ()
 	(interactive)
-	(org-roam) ;; open the org roam buffer
+	;; (org-roam) ;; open the org roam buffer
 	(execute-kbd-macro [?\M-x ?o ?r ?g ?- ?r ?o ?a ?m ?- ?f ?i ?n ?d ?- ?f ?i ?l ?e return ?t ?o ?d ?o return]) ;; hack this stuff because i don;t know how to do it otherwise
 	))
 
 (map! :leader
-      :desc "today"
-      "r d"
+      :desc "heute"
+      "r h"
       (lambda ()
 	(interactive)
 	(org-roam-dailies-today)))
 
 
 (map! :leader
-      :desc "yesterday"
-      "r y"
+      :desc "gestern"
+      "r g"
       (lambda ()
 	(interactive)
-	(org-roam-dailies-yesterday)))
+	(org-roam-dailies-yesterday 1)))
+
+(map! :leader
+      :desc "morgen"
+      "r m"
+      (lambda ()
+	(interactive)
+	(org-roam-dailies-tomorrow 1)))
+
 
 (map! :leader
       :desc "biffer"
@@ -298,15 +311,23 @@
 	(org-roam)))
 
 (map! :leader
-      :desc "biffer"
+      :desc "find note"
       "r f"
       (lambda ()
 	(interactive)
 	(org-roam-find-file)))
 
 
-   (set-face-attribute 'org-roam-link nil
-                          :foreground "cadetblue"
-                          )
+   ;;(set-face-attribute 'org-roam-link nil
+   ;;                       :foreground "cadetblue"
+   ;;                       )
 
 (setq org-link-frame-setup '((file . find-file-other-window)) )
+(setq org-image-actual-width (/ (display-pixel-width) 3))
+
+;; (setq auto-dim-other-buffers-face '(:background "#ddd"))
+
+
+(add-hook 'after-init-hook (lambda ()
+  (when (fboundp 'auto-dim-other-buffers-mode)
+    (auto-dim-other-buffers-mode t))))
