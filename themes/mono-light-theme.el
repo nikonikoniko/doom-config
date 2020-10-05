@@ -122,7 +122,7 @@
 `(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma4))))
 
 `(org-link ((t (underline t :background "beige"))))
-`(org-roam-link ((t (underline t :background "beige" :foreground "cadetblue"))))
+`(org-roam-link ((t (underline t :background "beige"))))
 
 `(org-drawer ((t (underline t :background "white"))))
 ;;`(org-hide ((t (underline t :background "white" ))))
@@ -143,7 +143,7 @@
 `(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
 `(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
 
-`(auto-dim-other-buffers-face ((t (:background ,bgchroma3))))
+ `(auto-dim-other-buffers-face ((t (:background "white smoke"))))
 
  `(query-replace ((t (:inherit (isearch)))))))
 
