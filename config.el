@@ -9,8 +9,29 @@
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
 
+
+
+(after! solaire-mode
+  (solaire-global-mode -1))
+
+(use-package! md-roam ; load immediately, before org-roam
+  :config
+  (setq md-roam-file-extension-single "md")) 
+    ;you can omit this if md, which is the default.
+
 (setq org-directory "~/f/notes")
 (setq org-roam-directory "~/f/notes/roam")
+
+;; order matters, by roam create which is made by default?
+(setq org-roam-file-extensions '("org" "md"))
+(setq md-roam-use-markdown-file-links t) ; default is nil
+
+(setq org-roam-capture-templates
+      '(("d" "default" plain (function org-roam--capture-get-point)
+       "%?"
+       :file-name "${slug}"
+       :head "#+title: ${title}\n"
+       :unnarrowed t)))
 
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
@@ -23,22 +44,19 @@
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
 
- (setq doom-font (font-spec :family "iosevka fixed ss01" :size 15 :weight 'light))
+ ;; (setq doom-font (font-spec :family "iosevka fixed ss01" :size 15 :weight 'light))
+ (setq doom-font (font-spec :family "iosevka" :size 15 :weight 'light))
+
 ;; (setq doom-font (font-spec :family "Iosevka Term" :size 18))
 ;; (setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
 ;; (setq doom-font (font-spec :family "IBM 3270" :size 18))
 ;; (setq doom-font (font-spec :family "Source Code Pro" :size 16))
 
- (setq doom-variable-pitch-font (font-spec :family "Noto Serif" :size 18 :weight 'light))
+ (setq doom-variable-pitch-font (font-spec :family "Source Serif Pro" :size 15 :weight 'light))
+ (setq doom-serif-font (font-spec :family "Source Serif Pro" :size 15 :weight 'light))
 ;; (setq doom-variable-pitch-font (font-spec :family "Liberation Serif" :size 14))
 
 ;; (add-hook 'org-mode-hook (lambda () (set-frame-font "Noto Serif Light" t)))
-
-(add-hook 'org-mode-hook (lambda ()
-                            (setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
-                            ;; (setq buffer-face-mode-face '(:family "DejaVu Serif Condensed"))
-                            (buffer-face-mode t)
-			    ))
 
 (setq doom-theme 'mono-light)
 
@@ -51,15 +69,12 @@
 (setq text-scale-mode-step 1.1)
 (setq-default line-spacing 0.05)
 
-;;(setq display-line-numbers-type nil)
-
 (custom-set-variables
   '(neo-window-position (quote right))
   '(neo-window-fixed-size nil)
   '(neo-smart-open t)
   )
-
-
+(setq doom-neotree-enable-variable-pitch nil)
 
 ;; (setq prettify-symbols-unprettify-at-point t)
 ;; (global-prettify-symbols-mode t)
@@ -195,8 +210,8 @@
 
 (add-to-list 'auto-mode-alist '("\\.tsx\\'" . web-mode))
 
-
 (add-hook 'web-mode-hook #'setup-tide-mode)
+
 ;; since emacs 27 this does not woek any more
 ;; (add-hook 'web-mode-hook
 ;;           (lambda ()
@@ -262,7 +277,6 @@
 ;; 
 (defun lights-on () (interactive) (load-theme 'mono-light t))
 (defun lights-off () (interactive) (load-theme 'mono-dark t))
-
 
 (setq evil-multiedit-follow-matches t)
 (define-key evil-normal-state-map (kbd "M-d") 'evil-multiedit-match-and-next)
@@ -354,7 +368,7 @@
 (setq org-link-frame-setup '((file . find-file-other-window)) )
 
 ;; set images smaller
-(setq org-image-actual-width (/ (display-pixel-width) 3))
+(setq org-image-actual-width (/ (display-pixel-width) 5))
 
 ;; (setq auto-dim-other-buffers-face '(:background "#ddd"))
 
@@ -369,3 +383,36 @@
 
 (setq doom-modeline-buffer-state-icon 0)
 (setq doom-modeline-icon nil)
+
+(defface font-lock-function-call-face nil nil)
+(setq callRegex '(
+		  ;; order matters? highrt up takes precedence ?
+		  ("function \\(\.*\\)\(" 1 'font-lock-function-name-face) ;; function THIS(
+		  ("def \\(\.*\\)\(" 1 'font-lock-function-name-face) ;; function THIS(
+		  ("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-call-face) ;; DOTHIS(
+		  ;;("(?<=function ).*?(?=\()" 1 'font-lock-function-name-face)
+		  ))
+(font-lock-add-keywords 'typescript-mode callRegex)
+(font-lock-add-keywords 'python-mode callRegex)
+
+;; '(js2-object-property ((t (:inherit font-lock-variable-name-face))))) 
+
+;; (add-hook 'after-make-frame-functions
+;;           (lambda (frame)
+;;             (doom/reload-font)))
+
+
+(defun set-serif () 
+  	(interactive)
+	(setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
+	;; (setq buffer-face-mode-face '(:family "DejaVu Serif Condensed"))
+	(buffer-face-mode)
+)
+;; note... for these to properly and always work, solaire mode from 
+;; DOOM needs to be disabled
+;; like this (in packages.el): 
+;; (package! solaire-mode :disable t)
+(add-hook 'org-mode-hook 'set-serif)
+(add-hook 'markdown-mode-hook 'set-serif)
+
+

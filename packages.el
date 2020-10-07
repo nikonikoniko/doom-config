@@ -30,6 +30,13 @@
 (package! auto-dim-other-buffers)
 ;; (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
+
+;; to enable my custom font setting in config
+(package! solaire-mode :disable t)
+
+(package! md-roam
+  :recipe (:host github
+  :repo "nobiot/md-roam"))
 ;; (package! prettify-symbols-mode)
 ;;(package! load-theme-buffer-local :recipe
 ;;  (:host github :repo "nikonikoniko/color-theme-buffer-local"))

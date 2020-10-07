@@ -9,9 +9,9 @@
       (bgchroma5 "#cccccc")
       (bgchroma6 "#bbbbbb")
 
-      (fgchroma1 "#111")
+      (fgchroma1 "#000")
       (fgchroma2 "#222")
-      (fgchroma3 "#333")
+      (fgchroma3 "#444")
       (fgchroma4 "#666")
       (fgchroma5 "#777")
       (fgchroma6 "#999")
@@ -49,6 +49,7 @@
  `(fringe ((t (:background ,bgchroma3))))
 
  `(fixed-pitch ((t (:family "Monospace"))))
+ `(variable-pitch ((t (:family "Source Sans Pro"))))
  ;; `(neo-dir-link-face ((t (:family "Iosevka"))))
  ;; `(neo-file-link-face ((t (:family "Monospace"))))
  ;; `(variable-pitch ((((type w32)) (:foundry "outline" :family "Arial")) (t (:family "Sans Serif"))))
@@ -67,12 +68,17 @@
  `(font-lock-comment-face ((t (:foreground ,comment :slant italic))))
  `(font-lock-constant-face ((t (:foreground ,obchroma1))))
  `(font-lock-doc-face ((t (:foreground ,fgchroma3))))
+
  ;; functions both when they are used, not defined
- `(font-lock-function-name-face ((t (:foreground ,fgchroma4 :slant italic))))
- `(web-mode-function-call-face ((t (:foreground ,fgchroma4 :slant italic))))
+
+ `(font-lock-function-call-face ((t (:foreground ,fgchroma2 :slant italic))))
+ `(web-mode-function-call-face ((t (:foreground ,fgchroma2 :slant italic))))
  ;; `(font-lock-function-name-face ((t (:weight bold :foreground "#fff"))))
- `(font-lock-variable-name-face ((t (:foreground ,fgchroma1))))
- `(web-mode-variable-name-face ((t (:foreground ,fgchroma1))))
+
+ `(font-lock-variable-name-face ((t (:foreground ,fgchroma3 :weight regular))))
+ `(web-mode-variable-name-face ((t (:foreground ,fgchroma3 :weight regular))))
+ `(font-lock-function-name-face ((t (:foreground ,fgchroma3 :weight regular))))
+
  `(nxml-element-local-name ((t (:foreground ,bgchroma6))))
  `(nxml-tag-delimiter ((t (:foreground ,bgchroma5))))
  `(web-mode-html-tag-bracket-face ((t (:foreground ,bgchroma5))))
@@ -127,12 +133,12 @@
 `(org-drawer ((t (underline t :background "white"))))
 ;;`(org-hide ((t (underline t :background "white" ))))
 
-`(org-document-title ((t (:height 1.6 :weight bold :underline t))))
+`(org-document-title ((t (:underline t))))
 `(org-document-info-keyword ((t (underline t :foreground ,bgchroma6))))
 
 `(org-level-1 ((t (:height 1.5 :weight regular))))
 `(org-level-2 ((t (:height 1.4 :weight regular))))
-`(org-level-3 ((t (:height 1.3 :weight regular))))
+`(org-level-3 ((t (:height 1.0 :weight bold))))
 `(org-level-4 ((t (:height 1.2 :weight regular))))
 `(org-level-5 ((t (:height 1.1 :weight regular))))
 `(org-table ((t (:inherit fixed-pitch))))
