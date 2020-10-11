@@ -127,20 +127,32 @@
 `(org-block ((t (:inherit fixed-pitch :height 1.0))))
 `(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma4))))
 
-`(org-link ((t (underline t :background "beige"))))
+`(org-link ((t (:underline t :foreground "cadetblue"))))
 `(org-roam-link ((t (underline t :background "beige"))))
 
-`(org-drawer ((t (underline t :background "white"))))
-;;`(org-hide ((t (underline t :background "white" ))))
+`(org-drawer ((t (:background "white"))))
+
+`(org-hide ((t (:foreground ,bgchroma3 :family "Monospace"))))
+`(org-indent ((t (:foreground ,bgchroma3 :family "Monospace" ))))
+
+;; inlince code =like this= 
+`(org-verbatim ((t (:height .8 :foreground ,fgchroma3 :background ,bgchroma4 :family "Monospace" ))))
 
 `(org-document-title ((t (:underline t))))
-`(org-document-info-keyword ((t (underline t :foreground ,bgchroma6))))
+`(org-document-info-keyword ((t (:underline t :foreground ,bgchroma6))))
+
+`(org-todo ((t (:foreground ,err))))
 
 `(org-level-1 ((t (:height 1.5 :weight regular))))
+`(markdown-header-face-1 ((t (:height 1.5 :weight regular))))
 `(org-level-2 ((t (:height 1.4 :weight regular))))
-`(org-level-3 ((t (:height 1.0 :weight bold))))
+`(markdown-header-face-2 ((t (:height 1.4 :weight regular))))
+`(org-level-3 ((t (:height 1.3 :weight regular))))
+`(markdown-header-face-3 ((t (:height 1.3 :weight regular))))
 `(org-level-4 ((t (:height 1.2 :weight regular))))
+`(markdown-header-face-4 ((t (:height 1.2 :weight regular))))
 `(org-level-5 ((t (:height 1.1 :weight regular))))
+`(markdown-header-face-5 ((t (:height 1.1 :weight regular))))
 `(org-table ((t (:inherit fixed-pitch))))
 `(org-document-info ((t (:foreground "dark orange"))))
 `(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))

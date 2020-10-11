@@ -19,7 +19,7 @@
   (setq md-roam-file-extension-single "md")) 
     ;you can omit this if md, which is the default.
 
-(setq org-directory "~/f/notes")
+(setq org-directory "~/f/notes/roam")
 (setq org-roam-directory "~/f/notes/roam")
 
 ;; order matters, by roam create which is made by default?
@@ -263,17 +263,12 @@
 ;; (add-hook 'after-change-major-mode-hook 'change-my-background-color)
 ;; (add-hook 'window-configuration-change-hook 'change-my-background-color)
 
-;; (setq xxx 0)
-;; (defun change-my-background-color ()
-;;   (cond
-;;     ((eq major-mode 'org-mode)
-;;       (eq xxx 0)
-;;       (setq xxx 1)
-;;       (load-theme 'mono-light t))
-;;     ((eq major-mode 'python-mode)
-;;       (eq xxx 1)
-;;       (setq xxx 0)
-;;       (load-theme 'mono-dark t))))
+(defun change-my-background-color ()
+  (cond
+    ((eq major-mode 'org-mode)
+      (load-theme 'mono-light t))
+    ((eq major-mode 'python-mode)
+      (load-theme 'mono-dark t))))
 ;; 
 (defun lights-on () (interactive) (load-theme 'mono-light t))
 (defun lights-off () (interactive) (load-theme 'mono-dark t))
@@ -377,9 +372,9 @@
   (when (fboundp 'auto-dim-other-buffers-mode)
     (auto-dim-other-buffers-mode t))))
 
-(setq-default
- left-margin-width 1
- right-margin-width 1)
+;; (setq-default
+;;  left-margin-width 1
+;;  right-margin-width 1)
 
 (setq doom-modeline-buffer-state-icon 0)
 (setq doom-modeline-icon nil)
@@ -416,3 +411,4 @@
 (add-hook 'markdown-mode-hook 'set-serif)
 
 
+(require 'org-inlinetask)
