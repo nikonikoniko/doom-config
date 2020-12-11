@@ -3,7 +3,7 @@
 
 (let ((bgchroma1 "#fff")
       ;; why is fff not white ?
-      (bgchroma2 "#f9f9f9")
+      (bgchroma2 "#fbfbfb")
       (bgchroma3 "#f5f5f5")
       (bgchroma4 "#dddddd")
       (bgchroma5 "#cccccc")
@@ -16,17 +16,20 @@
       (fgchroma5 "#777")
       (fgchroma6 "#999")
 
+      (inactiveback "whitesmoke")
+
       (err "orangered")
       (war "yellow")
       (inf "beige")
       ;; (comment "#dba")
-      (comment "#9bf")
+      (comment "#bbbbbb")
+      ;; (comment "#9bf")
       ;; (comment "#ac7")
       ;; (comment "lightsteelblue")
 
-      (hlchroma1 "cadetblue")
+      (hlchroma1 "#1e9c96")
       (hlchroma2 "palevioletred")
-      (hlchroma3 "#1e9c96")
+      (hlchroma3 "lightslategrey")
       (obchroma1 "palevioletred")
       (obchroma2 "palevioletred")
       (obchroma3 "palevioletred"))
@@ -46,7 +49,8 @@
 
  ;; tiny little line between windows
  `(window-divider ((t (:foreground ,bgchroma3 :background ,bgchroma3))))
- `(fringe ((t (:background ,bgchroma3))))
+ ;; `(fringe ((t (:background ,bgchroma3))))
+ `(fringe ((t (:foreground ,fgchroma1 :background ,bgchroma3))))
 
  `(fixed-pitch ((t (:family "Monospace"))))
  `(variable-pitch ((t (:family "Source Sans Pro"))))
@@ -56,18 +60,24 @@
  `(escape-glyph ((t (:weight bold :foreground ,fgchroma6))))
  `(homoglyph ((((background dark)) (:foreground "cyan")) (((type pc)) (:foreground "magenta")) (t (:foreground "brown"))))
  `(minibuffer-prompt ((t (:foreground ,fgchroma5))))
+
  ;; highlight is the line that you are on
- `(highlight ((t (:background ,bgchroma1))))
+ `(highlight ((t (:background nil))))
+
  ;; region is selected
- `(region ((t (:foreground ,bgchroma1 :background ,hlchroma1))))
- `(shadow ((t (:foreground ,fgchroma6))))
+ `(region ((t (:background ,bgchroma4))))
+ `(shadow ((t ())))
  `(secondary-selection ((t (:background ,bgchroma3))))
  `(trailing-whitespace ((t (:background ,err))))
  `(font-lock-builtin-face ((t (:foreground ,bgchroma6))))
  `(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
- `(font-lock-comment-face ((t (:foreground ,comment :slant italic))))
+ `(font-lock-comment-face ((t (:foreground ,comment :slant italic :background ,inactiveback))))
  `(font-lock-constant-face ((t (:foreground ,obchroma1))))
  `(font-lock-doc-face ((t (:foreground ,fgchroma3))))
+
+ `(web-mode-html-tag-face ((t (:foreground ,hlchroma3 :weight bold))))
+ `(web-mode-html-tag-bracket-face ((t (:foreground ,hlchroma3 :weight bold))))
+ `(web-mode-html-attr-name-face ((t (:foreground ,hlchroma3))))
 
  ;; functions both when they are used, not defined
 
@@ -97,7 +107,6 @@
  `(button ((t (:underline (:color foreground-color :style line)))))
  `(link ((t (:weight bold :underline (:color foreground-color :style line) :foreground ,fgchroma6))))
  `(link-visited ((t (:weight normal :underline (:color foreground-color :style line) :foreground ,fgchroma6))))
- `(fringe ((t (:foreground ,fgchroma1 :background ,bgchroma4))))
  `(header-line ((t (:inherit (mode-line)))))
  `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,bgchroma1 :background ,inf)) (t (:inherit (variable-pitch)))))
 
@@ -117,6 +126,7 @@
  `(flycheck-warning ((t (:foreground ,fgchroma3 :background ,war))))
  `(flycheck-error ((t (:foreground ,fgchroma3 :background ,err))))
  `(match ((t (:weight bold :foreground ,fgchroma6 :background ,bgchroma2))))
+
  ;; multiple cursor highlight:
  `(iedit-occurrence ((t (:background "cyan"))))
  `(next-error ((t (:inherit (region)))))
@@ -124,44 +134,49 @@
  `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma6))))
  `(rainbow-delimiters-depth-3-face ((t (:foreground ,fgchroma6))))
 
-`(org-block ((t (:inherit fixed-pitch :height 1.0))))
-`(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma4))))
+`(org-block ((t (:inherit fixed-pitch :background ,bgchroma3))))
+`(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma4 :background  ,bgchroma3))))
 
-`(org-link ((t (:underline t :foreground "cadetblue"))))
-`(org-roam-link ((t (underline t :background "beige"))))
+`(org-link ((t (:underline t :foreground ,hlchroma1))))
+`(org-roam-link ((t (underline t :background ,inactiveback))))
 
-`(org-drawer ((t (:background "white"))))
+`(org-drawer ((t (:background ,bgchroma1))))
 
-`(org-hide ((t (:foreground ,bgchroma3 :family "Monospace"))))
-`(org-indent ((t (:foreground ,bgchroma3 :family "Monospace" ))))
+;; indentation
+;; `(org-hide ((t (:foreground "cadetblue" :family "Monospace" :height 1.0)))) ;; the stars at the front of the headers, 1 means hidden?
+;; `(org-indent ((t (:foreground "orange" :background "blue" :family "Monospace" :height 1.0))))
+`(org-hide ((t (:foreground ,fgchroma1, :weight bold ))))
 
 ;; inlince code =like this= 
-`(org-verbatim ((t (:height .8 :foreground ,fgchroma3 :background ,bgchroma4 :family "Monospace" ))))
+;;`(org-verbatim ((t (:height .8 :foreground ,fgchroma3 :background ,bgchroma3 :family "Monospace" ))))
 
 `(org-document-title ((t (:underline t))))
 `(org-document-info-keyword ((t (:underline t :foreground ,bgchroma6))))
 
-`(org-todo ((t (:foreground ,err))))
+`(org-todo ((t (:background ,err, :foreground ,fgchroma1))))
+`(org-done ((t (:foreground "cadetblue"))))
+`(org-headline-done ((t (:foreground ,fgchroma3))))
 
-`(org-level-1 ((t (:height 1.5 :weight regular))))
+`(org-level-1 ((t (:height 1.0 :weight bold))))
 `(markdown-header-face-1 ((t (:height 1.5 :weight regular))))
-`(org-level-2 ((t (:height 1.4 :weight regular))))
+`(org-level-2 ((t (:height 1.0 :weight bold))))
 `(markdown-header-face-2 ((t (:height 1.4 :weight regular))))
-`(org-level-3 ((t (:height 1.3 :weight regular))))
+`(org-level-3 ((t (:height 1.0 :weight bold))))
 `(markdown-header-face-3 ((t (:height 1.3 :weight regular))))
-`(org-level-4 ((t (:height 1.2 :weight regular))))
+`(org-level-4 ((t (:height 1.0 :weight bold))))
 `(markdown-header-face-4 ((t (:height 1.2 :weight regular))))
-`(org-level-5 ((t (:height 1.1 :weight regular))))
+`(org-level-5 ((t (:height 1.0 :weight bold))))
 `(markdown-header-face-5 ((t (:height 1.1 :weight regular))))
+
 `(org-table ((t (:inherit fixed-pitch))))
 `(org-document-info ((t (:foreground "dark orange"))))
 `(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
 `(org-property-value ((t (:inherit fixed-pitch))) t)
 `(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
-`(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold :height 0.8))))
+`(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold ))))
 `(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
 
- `(auto-dim-other-buffers-face ((t (:background "white smoke"))))
+ `(auto-dim-other-buffers-face ((t (:background ,bgchroma3))))
 
  `(query-replace ((t (:inherit (isearch)))))))
 
