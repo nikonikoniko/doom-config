@@ -27,6 +27,8 @@
 (package! company-org-roam)
 (package! evil-multiedit)
 
+(package! notmuch)
+
 (package! auto-dim-other-buffers)
 ;; (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)

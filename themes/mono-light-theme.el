@@ -132,8 +132,8 @@
 
 `(org-drawer ((t (:background "white"))))
 
-`(org-hide ((t (:foreground ,bgchroma3 :family "Monospace"))))
-`(org-indent ((t (:foreground ,bgchroma3 :family "Monospace" ))))
+`(org-indent ((t (:foreground ,bgchroma3 :family "Monospace" :height .7 ))))
+`(org-hide ((t (:foreground ,bgchroma3 :family "Monospace" :height .7))))
 
 ;; inlince code =like this= 
 `(org-verbatim ((t (:height .8 :foreground ,fgchroma3 :background ,bgchroma4 :family "Monospace" ))))

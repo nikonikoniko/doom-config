@@ -49,6 +49,7 @@
 
 ;; (setq doom-font (font-spec :family "Iosevka Term" :size 18))
 ;; (setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
+
 ;; (setq doom-font (font-spec :family "IBM 3270" :size 18))
 ;; (setq doom-font (font-spec :family "Source Code Pro" :size 16))
 
@@ -412,3 +413,37 @@
 
 
 (require 'org-inlinetask)
+
+
+  (push '("r" "Respond to email"
+          entry (file org-default-notes-file)
+          "* TODO Respond to %:from on %:subject  :email: \nSCHEDULED: %t\n%U\n%a\n"
+          :clock-in t
+          :clock-resume t
+          :immediate-finish t)
+        org-capture-templates)
+
+
+(defun vedang/notmuch-reply-later ()
+  "Capture this email for replying later."
+  (interactive)
+  ;; You need `org-capture' to be set up for this to work. Add this
+  ;; code somewhere in your init file after `org-cature' is loaded:
+
+
+  (org-capture nil "r")
+
+  ;; The rest of this function is just a nice message in the modeline.
+  (let* ((email-subject (format "%s..."
+                                (substring (notmuch-show-get-subject) 0 15)))
+         (email-from (format "%s..."
+                             (substring (notmuch-show-get-from) 0 15)))
+         (email-string (format "%s (From: %s)" email-subject email-from)))
+    (message "Noted! Reply Later: %s" email-string)))
+
+
+(evil-set-initial-state 'notmuch-search-mode 'emacs)
+(evil-set-initial-state 'notmuch-tree-mode 'emacs)
+
+(add-to-list 'evil-emacs-state-modes 'notmmuch-search-mode)
+(add-to-list 'evil-emacs-state-modes 'notmmuch-tree-mode)
