@@ -1,10 +1,10 @@
 (deftheme mono-dark
   "Created 2020-03-09.")
 
-(let ((bgchroma1 "#222222")
+(let ((bgchroma1 "#242424")
       ;; why is fff not white ?
-      (bgchroma2 "#242424")
-      (bgchroma3 "#2a2a2a")
+      (bgchroma2 "#2a2a2a")
+      (bgchroma3 "#333333")
       (bgchroma4 "#444444")
       (bgchroma5 "#555555")
       (bgchroma6 "#666666")
@@ -70,7 +70,7 @@
  `(trailing-whitespace ((t (:background ,err))))
  `(font-lock-builtin-face ((t (:foreground ,bgchroma6))))
  `(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
- `(font-lock-comment-face ((t (:foreground ,comment :slant italic :background ,inactiveback))))
+ `(font-lock-comment-face ((t (:foreground ,comment :slant italic ))))
  `(font-lock-constant-face ((t (:foreground ,obchroma1))))
  `(font-lock-doc-face ((t (:foreground ,fgchroma3))))
 

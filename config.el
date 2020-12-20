@@ -302,19 +302,6 @@
 ;;   Org-Roam 
 ;;
 
-;; (setq org-adapt-indentation nil)
-;; (setq-default org-adapt-indentation nil)
-
-(after! org
-  (setq
-	org-adapt-indentation nil
-        org-startup-indented nil
-	org-indent-mode nil
-	org-hide-leading-stars nil
-	org-indent-mode-turns-on-hiding-stars nil
-	org-indent-indentation-per-level 1
-       ))
-
 (setq org-roam-buffer-window-parameters '(
 					  (no-delete-other-windows . t)
 					  )) 
@@ -367,9 +354,9 @@
 	(org-roam-find-file)))
 
 
-   ;;(set-face-attribute 'org-roam-link nil
-   ;;                       :foreground "cadetblue"
-   ;;                       )
+;;(set-face-attribute 'org-roam-link nil
+;;                       :foreground "cadetblue"
+;;                       )
 
 (setq org-link-frame-setup '((file . find-file-other-window)) )
 
@@ -380,12 +367,12 @@
 
 
 (add-hook 'after-init-hook (lambda ()
-  (when (fboundp 'auto-dim-other-buffers-mode)
-    (auto-dim-other-buffers-mode t))))
+			     (when (fboundp 'auto-dim-other-buffers-mode)
+			       (auto-dim-other-buffers-mode t))))
 
 ;;(setq-default
-  ;;left-margin-width 5
-  ;;right-margin-width 6)
+;;left-margin-width 5
+;;right-margin-width 6)
 
 (setq doom-modeline-buffer-state-icon 0)
 (setq doom-modeline-icon nil)
@@ -409,17 +396,47 @@
 
 
 (defun set-serif () 
-  	(interactive)
-	(setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
-	;; (setq buffer-face-mode-face '(:family "DejaVu Serif Condensed"))
-	(buffer-face-mode)
-)
+  (interactive)
+  (setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
+  (setq line-spacing 0.3)
+  (buffer-face-mode)
+  )
+
+
+(defun add-padding ()
+  (interactive)
+  (setq left-margin-width 5)
+  (setq right-margin-width 5)
+  (setq header-line-format " ")
+  (hide-mode-line-mode t)
+  (set-window-buffer nil (current-buffer)))
+
+(defun remove-indent ()
+ (interactive)
+ (+org-pretty-mode t)
+ (setq
+	org-adapt-indentation nil
+        org-startup-indented t
+	org-indent-mode t
+	org-hide-leading-stars t
+	org-indent-mode-turns-on-hiding-stars t
+	org-pretty-entities t
+	org-indent-indentation-per-level 1
+      	org-bullets-bullet-list '("➤") ;; no bullets, needs org-bullets package
+      	;; org-bullets-bullet-list '("") ;; no bullets, needs org-bullets package
+      	org-ellipsis '("...")
+       )
+  )
+
 ;; note... for these to properly and always work, solaire mode from 
 ;; DOOM needs to be disabled
 ;; like this (in packages.el): 
 ;; (package! solaire-mode :disable t)
- (add-hook 'org-mode-hook 'set-serif)
- (add-hook 'markdown-mode-hook 'set-serif)
+(add-hook 'org-mode-hook 'set-serif)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(add-hook 'org-mode-hook 'add-padding)
+(add-hook 'org-mode-hook 'remove-indent)
+(add-hook 'markdown-mode-hook 'set-serif)
 
 
 (require 'org-inlinetask)

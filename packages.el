@@ -27,6 +27,7 @@
 (package! company-org-roam)
 (package! evil-multiedit)
 
+
 (package! auto-dim-other-buffers)
 ;; (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
@@ -37,6 +38,9 @@
 (package! md-roam
   :recipe (:host github
   :repo "nobiot/md-roam"))
+
+
+(package! org-bullets)
 ;; (package! prettify-symbols-mode)
 ;;(package! load-theme-buffer-local :recipe
 ;;  (:host github :repo "nikonikoniko/color-theme-buffer-local"))
