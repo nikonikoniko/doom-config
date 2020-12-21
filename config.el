@@ -11,9 +11,6 @@
 
 
 
-(after! solaire-mode
-  (solaire-global-mode -1))
-
 (use-package! md-roam ; load immediately, before org-roam
   :config
   (setq md-roam-file-extension-single "md")) 
@@ -67,6 +64,8 @@
 (global-visual-line-mode nil)
 
 (blink-cursor-mode t)
+
+
 (setq text-scale-mode-step 1.1)
 (setq-default line-spacing 0.05)
 
@@ -304,6 +303,18 @@
 ;;   Org-Roam 
 ;;
 
+;; (setq org-adapt-indentation nil)
+;; (setq-default org-adapt-indentation nil)
+
+(after! org
+  (setq
+	org-adapt-indentation nil
+        org-startup-indented nil
+	org-indent-mode nil
+	org-hide-leading-stars nil
+	org-indent-mode-turns-on-hiding-stars nil
+	org-indent-indentation-per-level 1
+       ))
 
 (setq org-roam-buffer-window-parameters '(
 					  (no-delete-other-windows . t)
@@ -373,9 +384,9 @@
   (when (fboundp 'auto-dim-other-buffers-mode)
     (auto-dim-other-buffers-mode t))))
 
-;; (setq-default
-;;  left-margin-width 1
-;;  right-margin-width 1)
+;;(setq-default
+  ;;left-margin-width 5
+  ;;right-margin-width 6)
 
 (setq doom-modeline-buffer-state-icon 0)
 (setq doom-modeline-icon nil)
@@ -408,8 +419,8 @@
 ;; DOOM needs to be disabled
 ;; like this (in packages.el): 
 ;; (package! solaire-mode :disable t)
-(add-hook 'org-mode-hook 'set-serif)
-(add-hook 'markdown-mode-hook 'set-serif)
+ (add-hook 'org-mode-hook 'set-serif)
+ (add-hook 'markdown-mode-hook 'set-serif)
 
 
 (require 'org-inlinetask)
@@ -447,3 +458,4 @@
 
 (add-to-list 'evil-emacs-state-modes 'notmmuch-search-mode)
 (add-to-list 'evil-emacs-state-modes 'notmmuch-tree-mode)
+
