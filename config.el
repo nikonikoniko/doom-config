@@ -42,7 +42,7 @@
 ;; font string. You generally only need these two:
 
  ;; (setq doom-font (font-spec :family "iosevka fixed ss01" :size 15 :weight 'light))
- (setq doom-font (font-spec :family "iosevka" :size 15 :weight 'light))
+ (setq doom-font (font-spec :family "iosevka" :size 20 :weight 'light))
 
 ;; (setq doom-font (font-spec :family "Iosevka Term" :size 18))
 ;; (setq doom-font (font-spec :family "Inconsolata Nerd Font" :size 18 :weight 'light))
@@ -60,21 +60,18 @@
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type nil)
-(global-visual-line-mode nil)
 
 (blink-cursor-mode t)
 
 
 (setq text-scale-mode-step 1.1)
-(setq-default line-spacing 0.05)
+;; (setq-default line-spacing 0.05)
 
 (custom-set-variables
   '(neo-window-position (quote right))
-  '(neo-window-fixed-size nil)
-  '(neo-smart-open t)
   )
 (setq doom-neotree-enable-variable-pitch nil)
+(setq neo-autorefresh nil)
 
 ;; (setq prettify-symbols-unprettify-at-point t)
 ;; (global-prettify-symbols-mode t)
@@ -122,7 +119,7 @@
 ;; 
 
 ;; use the local project TS server instead of the global one
-(setq tide-tsserver-executable "node_modules/typescript/bin/tsserver")
+;; (setq tide-tsserver-executable "node_modules/typescript/bin/tsserver")
 
 (defun setup-tide-mode ()
   (interactive)
@@ -303,90 +300,95 @@
 ;;   Org-Roam 
 ;;
 
-;; (setq org-adapt-indentation nil)
-;; (setq-default org-adapt-indentation nil)
-
-(after! org
-  (setq
-	org-adapt-indentation nil
-        org-startup-indented nil
-	org-indent-mode nil
-	org-hide-leading-stars nil
-	org-indent-mode-turns-on-hiding-stars nil
-	org-indent-indentation-per-level 1
-       ))
-
 (setq org-roam-buffer-window-parameters '(
 					  (no-delete-other-windows . t)
 					  )) 
 (setq org-roam-buffer-width 0.15)
+(setq org-log-done t)
+
+
+;; (map! :leader
+      ;; :desc "roam jump to file"
+      ;; "r t"
+      ;; (lambda ()
+	;; (interactive)
+	;; (org-roam) ;; open the org roam buffer
+	;; (execute-kbd-macro [?\M-x ?o ?r ?g ?- ?r ?o ?a ?m ?- ?f ?i ?n ?d ?- ?f ?i ?l ?e return ?t ?o ?d ?o return]) ;; hack this stuff because i don;t know how to do it otherwise
+	;; ))
 
 (map! :leader
-      :desc "roam jump to todo todo"
+      :desc "TODO LIST"
       "r t"
       (lambda ()
 	(interactive)
-	;; (org-roam) ;; open the org roam buffer
-	(execute-kbd-macro [?\M-x ?o ?r ?g ?- ?r ?o ?a ?m ?- ?f ?i ?n ?d ?- ?f ?i ?l ?e return ?t ?o ?d ?o return]) ;; hack this stuff because i don;t know how to do it otherwise
+	(org-agenda nil "z") ;; see z, my custom view below
 	))
+
 
 (map! :leader
       :desc "heute"
       "r h"
       (lambda ()
-	(interactive)
-	(org-roam-dailies-today)))
-
-
-(map! :leader
-      :desc "gestern"
-      "r g"
-      (lambda ()
-	(interactive)
-	(org-roam-dailies-yesterday 1)))
+        (interactive)
+	(org-roam-dailies-today)
+	;;(org-journal-new-entry)
+        ;; (org-journal-open-current-journal-file)
+	;; (org-update-all-dblocks)
+	))
 
 (map! :leader
-      :desc "morgen"
-      "r m"
+      :desc "next daily"
+      "r n"
       (lambda ()
-	(interactive)
-	(org-roam-dailies-tomorrow 1)))
+        (interactive)
+        (org-journal-next-entry)))
 
+(map! :leader
+      :desc "previous daily"
+      "r p"
+      (lambda ()
+        (interactive)
+        (org-journal-previous-entry)
+        ))
 
 (map! :leader
       :desc "biffer"
       "r r"
       (lambda ()
-	(interactive)
-	(org-roam)))
+        (interactive)
+        (org-roam)))
 
 (map! :leader
       :desc "find note"
       "r f"
       (lambda ()
-	(interactive)
-	(org-roam-find-file)))
+        (interactive)
+        (org-roam-find-file)))
 
 
-   ;;(set-face-attribute 'org-roam-link nil
-   ;;                       :foreground "cadetblue"
-   ;;                       )
+;;(set-face-attribute 'org-roam-link nil
+;;                       :foreground "cadetblue"
+;;                       )
 
 (setq org-link-frame-setup '((file . find-file-other-window)) )
 
 ;; set images smaller
 (setq org-image-actual-width (/ (display-pixel-width) 5))
 
+
+
+
+
 ;; (setq auto-dim-other-buffers-face '(:background "#ddd"))
 
 
 (add-hook 'after-init-hook (lambda ()
-  (when (fboundp 'auto-dim-other-buffers-mode)
-    (auto-dim-other-buffers-mode t))))
+			     (when (fboundp 'auto-dim-other-buffers-mode)
+			       (auto-dim-other-buffers-mode t))))
 
 ;;(setq-default
-  ;;left-margin-width 5
-  ;;right-margin-width 6)
+;;left-margin-width 5
+;;right-margin-width 6)
 
 (setq doom-modeline-buffer-state-icon 0)
 (setq doom-modeline-icon nil)
@@ -410,17 +412,57 @@
 
 
 (defun set-serif () 
-  	(interactive)
-	(setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
-	;; (setq buffer-face-mode-face '(:family "DejaVu Serif Condensed"))
-	(buffer-face-mode)
-)
+  (interactive)
+  (setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
+  ;; etq line-spacing 0.3)
+  (buffer-face-mode)
+  )
+
+(global-visual-line-mode nil)
+(setq display-line-numbers-type t)
+
+(defun add-padding ()
+  (interactive)
+  (setq left-margin-width 5)
+  (setq display-line-numbers-type nil)
+  (setq right-margin-width 5)
+  (setq header-line-format " ")
+  (hide-mode-line-mode t)
+  (set-window-buffer nil (current-buffer)))
+
+(defun remove-indent ()
+ (interactive)
+ (+org-pretty-mode t)
+ (setq
+	org-adapt-indentation nil ;; do not automatically insert 'tabs' to balance text under headlines
+        org-startup-indented nil ;; don't 'fake' any indentation either
+	org-indent-mode nil ;; don't 'fake' any indentation either
+	org-hide-leading-stars nil ;; hide the starts in front of the headlines
+	org-indent-mode-turns-on-hiding-stars nil ;; in indent mode hide the leading stars too
+	org-pretty-entities t
+	org-indent-indentation-per-level 1
+      	;; org-bullets-bullet-list '("➤") ;; no bullets, needs org-bullets package
+      	;; org-bullets-bullet-list '("\u200b") ;; no bullets, needs org-bullets package
+      	;; org-bullets-bullet-list '("\u200b") ;; zero-width-space character
+      	org-bullets-bullet-list '(">") ;; no bullets, needs org-bullets package
+      	org-bullets-bullet-list '("*" "**" "***" "****" "*****" "******") ;; no bullets, needs org-bullets package
+      	;; org-bullets-bullet-list '("") ;; no bullets, needs org-bullets package
+      	org-ellipsis '("...")
+       )
+  (advice-add 'org-indent-initialize :after #'org-indent-use-stars-for-strings)
+  )
+
 ;; note... for these to properly and always work, solaire mode from 
 ;; DOOM needs to be disabled
 ;; like this (in packages.el): 
 ;; (package! solaire-mode :disable t)
- (add-hook 'org-mode-hook 'set-serif)
- (add-hook 'markdown-mode-hook 'set-serif)
+(add-hook 'org-mode-hook 'set-serif)
+(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+(add-hook 'org-mode-hook 'add-padding)
+(add-hook 'org-mode-hook 'remove-indent)
+(add-hook 'markdown-mode-hook 'set-serif)
+
+
 
 
 (require 'org-inlinetask)
@@ -459,3 +501,216 @@
 (add-to-list 'evil-emacs-state-modes 'notmmuch-search-mode)
 (add-to-list 'evil-emacs-state-modes 'notmmuch-tree-mode)
 
+(require 'org-indent)
+(setq org-indent-boundary-char ?\s)
+
+(defface org-indent-level- nil nil)
+(defface org-indent-level-1 nil nil)
+(defface org-indent-level-2 nil nil)
+(defface org-indent-level-3 nil nil)
+(defface org-indent-level-4 nil nil)
+(defface org-indent-level-5 nil nil)
+(defface org-indent-level-6 nil nil)
+
+(defface org-fake-schedule nil nil)
+
+ ;; (org-add-props heading-prefix nil 'face 'org-indent))
+(defun org-dblock-write:hello (params)
+  (defvar stri (org-batch-agenda "a"))
+  ;; (defvar stri "aaaaa")
+  ;; (defvar sta (org-add-props stri nil 'face 'org-fake-schedule)) ;; doesnt work
+   ;; (defvar aa (put-text-property 0 (length stri) 'face 'org-fake-schedule stri))
+  (insert stri))
+  ;;(insert (substring stri 0 nil)))
+
+;; (message (hello nil))
+
+
+;; (setq org-journal-date-prefix "#+TITLE: "
+      ;; org-journal-file-header "#+BEGIN: hello \n #+END:"
+      ;; org-journal-date-format "%a, %Y-%m-%d"
+      ;; org-journal-dir "~/f/notes/roam/journal"
+      ;; org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"\"WAITING\"\"SOMEDAY\"\"BACKLOG\""
+      ;; org-journal-file-format "%Y-%m-%d.org")
+
+
+
+(defun org-indent--compute-prefixes ()
+    "Compute prefix strings for regular text and headlines."
+    (setq org-indent--heading-line-prefixes
+          (make-vector org-indent--deepest-level nil))
+    (setq org-indent--inlinetask-line-prefixes
+          (make-vector org-indent--deepest-level nil))
+    (setq org-indent--text-line-prefixes
+          (make-vector org-indent--deepest-level nil))
+    (dotimes (n org-indent--deepest-level)
+      (let ((indentation (if (<= n 1) 0
+                           (* (1- org-indent-indentation-per-level)
+                              (1- n)))))
+        ;; Headlines line prefixes.
+        (let ((heading-prefix (make-string indentation ?A)))
+          (aset org-indent--heading-line-prefixes
+                (cond ((= n 1) 0)
+                      ((= n 2) 0)
+                      ((= n 3) 0)
+                      ((= n 4) 0)
+                      (t 2))
+                (org-add-props heading-prefix nil 'face 'org-indent))
+          ;; Inline tasks line prefixes
+          (aset org-indent--inlinetask-line-prefixes
+                n
+                (cond ((<= n 1) "")
+                      ((bound-and-true-p org-inlinetask-show-first-star)
+                       (concat org-indent-inlinetask-first-star
+                               (substring heading-prefix 1)))
+                      (t (org-add-props heading-prefix nil 'face 'org-indent)))))
+        ;; Text line prefixes.
+        (aset org-indent--text-line-prefixes
+              n
+              (org-add-props
+                  (concat (make-string
+                           (+
+                            ;; TODO: Wrap it into customisation
+                            ;;
+                            ;; This is special hack to mititagte difference
+                            ;; between content indentation and headlines
+                            ;; indentation. When headline and content have
+                            ;; different fonts or fonts of the different height,
+                            ;; the width of indentation will be different to,
+                            ;; breaking it.
+                            (cond ((= n 1) 3) ;; Level 1 content indentation
+                                  ((= n 2) 4) ;; Level 2 content indentation
+                                  ((= n 3) 6) ;; Level 3 content indentation
+                                  ((= n 4) 9) ;; Level 3 content indentation
+                                  ((= n 5) 10) ;; Level 3 content indentation
+                                  ((= n 6) 12) ;; Level 3 content indentation
+                                  (t n))      ;; Everything else
+                            ;; End of hack
+                              indentation) ?*)
+                          (and (> n 0)
+                               (char-to-string org-indent-boundary-char)))
+                  nil 'face (cond ((= n 1) 'org-indent-level-1) 
+				  ((= n 2) 'org-indent-level-2)
+				  ((= n 3) 'org-indent-level-3)
+				  ((= n 4) 'org-indent-level-4)
+				  ((= n 5) 'org-indent-level-5)
+				  ((= n 6) 'org-indent-level-6)
+				  (t 'org-indent-level-4))
+		  )))))
+
+
+
+
+
+
+
+;; (setq org-babel-default-header-args '((:exports . "both"))) ;; enabling this causes the jupyter-typescript block below not work...
+
+;; (setq org-babel-default-header-args:typescript '((:session . "ts")))
+
+(setq org-babel-default-header-args:jupyter-typescript '(
+							 (:exports . "both")
+                                                         (:session . "ts")
+                                                         (:kernel . "tslab")))
+
+
+;; this seems to add syntax-highlighting to jupyter-python and jupyter-typescript blocks
+(after! org-src
+ (dolist (lang '(python typescript jupyter))
+ (cl-pushnew (cons (format "jupyter-%s" lang) lang)
+                org-src-lang-modes :key #'car))
+  ;; (org-babel-jupyter-override-src-block "python") ;; alias all python to jupyter-python
+  ;; (org-babel-jupyter-override-src-block "typescript") ;; alias all python to jupyter-python
+ )
+
+
+(use-package! treemacs-persp
+  :when (featurep! :ui workspaces)
+  :after (treemacs persp-mode)
+  :config
+  (treemacs-set-scope-type 'Perspectives))
+
+(after! treemacs
+  (defun +treemacs--init ()
+    (require 'treemacs)
+    (let ((origin-buffer (current-buffer)))
+      (cl-letf (((symbol-function 'treemacs-workspace->is-empty?)
+                 (symbol-function 'ignore)))
+        (treemacs--init))
+      (unless (bound-and-true-p persp-mode)
+        (dolist (project (treemacs-workspace->projects (treemacs-current-workspace)))
+          (treemacs-do-remove-project-from-workspace project)))
+      (with-current-buffer origin-buffer
+        (let ((project-root (or (doom-project-root) default-directory)))
+          (treemacs-do-add-project-to-workspace
+           (treemacs--canonical-path project-root)
+           (doom-project-name project-root)))
+        (setq treemacs--ready-to-follow t)
+        (when (or treemacs-follow-after-init treemacs-follow-mode)
+          (treemacs--follow))))))
+
+(org-super-agenda-mode t)
+(setq org-agenda-start-day "-1d")
+
+(setq org-agenda-files '("~/f/notes/roam"))
+;; save org buffers after todo
+(add-hook 'focus-out-hook
+         (lambda () (org-save-all-org-buffers)))
+
+
+(add-hook 'org-agenda-mode-hook 'add-padding)
+
+(setq org-agenda-custom-commands
+      '(("z" "nikos view"
+         ((agenda "" ((org-agenda-span 5)))
+          (alltodo "" ((org-agenda-overriding-header "")
+                       (org-super-agenda-groups
+                                '(
+                                 (:name "Todayyyy"
+                                  ;; :time-grid t
+                                  :scheduled today
+                                  :deadline today)
+				(:name "Overdue"
+                                  :deadline past
+                                  :scheduled past)
+				(:name "Deadlines"
+                                  :deadline future
+				  :order 3)
+                                 (:name "Front Burner"
+                                  :todo "STRT"
+				  :order 2)
+                                 (:name "backlog"
+                                  :todo "HOLD"
+				  :order 12)
+				 (:name "scheduled"
+				  :scheduled future
+				  :order 4
+				  )
+                                 (:name "Work (unscheduled)"
+                                  :tag "work"
+				  :order 5)
+                                 (:name "Email (unscheduled)"
+                                  :tag "email"
+				  :order 6)
+                                 (:name "Personal (unscheduled)"
+                                  :tag "personal"
+				  :order 7)
+                                 (:name "Learn (unscheduled)"
+                                  :tag "learn"
+				  :order 8)
+                                 (:name "!!! to triage! ----- schedule or tag"
+                                  :todo "TODO"
+				  :order 1)
+                                 (:name "Waiting"
+                                  :todo "WAIT"
+				  :order 10)
+                                 ))))))))
+
+;;(setq sublimity-map-size 20)
+;;(setq sublimity-map-fraction 0.3)
+;;(setq sublimity-map-text-scale -7)
+;; (require 'sublimity)
+;;(require 'sublimity-scroll)
+;; (require 'sublimity-map) ;; experimental
+;; (require 'sublimity-attractive)
+;;(setq sublimity-attractive-centering-width 110)

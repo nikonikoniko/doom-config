@@ -27,18 +27,35 @@
 (package! company-org-roam)
 (package! evil-multiedit)
 
+(package! frames-only-mode)
+
 (package! notmuch)
+
+(package! mixed-pitch)
+(package! ts-comint)
 
 (package! auto-dim-other-buffers)
 ;; (package! mixed-pitch)
 (package! evil-terminal-cursor-changer)
 
+(package! treemacs-persp)
+
+(package! jupyter)
+
+(package! org-super-agenda)
+
 ;; to enable my custom font setting in config
 (package! solaire-mode :disable t)
+
+(package! ob-typescript)
+(package! sublimity)
 
 (package! md-roam
   :recipe (:host github
   :repo "nobiot/md-roam"))
+
+
+(package! org-bullets)
 ;; (package! prettify-symbols-mode)
 ;;(package! load-theme-buffer-local :recipe
 ;;  (:host github :repo "nikonikoniko/color-theme-buffer-local"))

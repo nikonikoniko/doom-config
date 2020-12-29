@@ -1,10 +1,10 @@
 (deftheme mono-dark
   "Created 2020-03-09.")
 
-(let ((bgchroma1 "#222222")
+(let ((bgchroma1 "#242424")
       ;; why is fff not white ?
-      (bgchroma2 "#242424")
-      (bgchroma3 "#2a2a2a")
+      (bgchroma2 "#2a2a2a")
+      (bgchroma3 "#333333")
       (bgchroma4 "#444444")
       (bgchroma5 "#555555")
       (bgchroma6 "#666666")
@@ -32,23 +32,26 @@
       (hlchroma3 "lightslategrey")
       (obchroma1 "yellow")
       (obchroma2 "palevioletred")
-      (obchroma3 "palevioletred"))
-
+      (obchroma3 "palevioletred")
+      (serif "Source Serif Pro")
+      (sans "Sans")
+      (mono "iosevka"))
 
 (custom-theme-set-faces
  'mono-dark
  `(default ((t (
 		:foreground ,fgchroma3
 		:background ,bgchroma2
-		:stipple nil 
+		:stipple nil
 		:inherit nil))))
  `(cursor ((t (:background "turquoise"))))
  `(line-number ((t (:foreground ,bgchroma4))))
- `(line-number-current-line ((t (:foreground ,bgchroma6 :background ,bgchroma1))))
+ `(line-number-current-line ((t (:foreground ,bgchroma6 :background))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
 
  ;; tiny little line between windows
  `(window-divider ((t (:foreground ,bgchroma3 :background ,bgchroma3))))
+ ;; `(fringe ((t (:background ,bgchroma3))))
  `(fringe ((t (:foreground ,fgchroma1 :background ,bgchroma3))))
 
  `(fixed-pitch ((t (:family "Monospace"))))
@@ -70,7 +73,7 @@
  `(trailing-whitespace ((t (:background ,err))))
  `(font-lock-builtin-face ((t (:foreground ,bgchroma6))))
  `(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
- `(font-lock-comment-face ((t (:foreground ,comment :slant italic :background ,inactiveback))))
+ `(font-lock-comment-face ((t (:foreground ,comment :slant italic))))
  `(font-lock-constant-face ((t (:foreground ,obchroma1))))
  `(font-lock-doc-face ((t (:foreground ,fgchroma3))))
 
@@ -106,7 +109,6 @@
  `(button ((t (:underline (:color foreground-color :style line)))))
  `(link ((t (:weight bold :underline (:color foreground-color :style line) :foreground ,fgchroma6))))
  `(link-visited ((t (:weight normal :underline (:color foreground-color :style line) :foreground ,fgchroma6))))
- `(header-line ((t (:inherit (mode-line)))))
  `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,bgchroma1 :background ,inf)) (t (:inherit (variable-pitch)))))
 
  `(mode-line          ((t (:height 80 :box nil :foreground ,fgchroma6 :background ,bgchroma2))))
@@ -133,47 +135,107 @@
  `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma6))))
  `(rainbow-delimiters-depth-3-face ((t (:foreground ,fgchroma6))))
 
-`(org-block ((t (:inherit fixed-pitch :background ,bgchroma3))))
-`(org-meta-line ((t (:inherit (fixed-pitch) :foreground ,bgchroma4 :background  ,bgchroma3))))
+`(org-block ((t (:family ,mono :weight light :height .8 :background ,bgchroma1))))
+`(org-block-begin-line ((t (:foreground ,bgchroma4 :height .5))))
+`(org-meta-line ((t (:foreground ,bgchroma6))))
 
-`(org-link ((t (:underline t :foreground ,hlchroma1))))
-`(org-roam-link ((t (underline t :background ,inactiveback))))
+`(org-link ((t (:foreground ,hlchroma1))))
+`(org-roam-link ((t (:foreground ,obchroma1))))
 
-`(org-drawer ((t (:background ,bgchroma1))))
+`(org-drawer ((t (:foreground ,bgchroma6 :height .5 :line-spacing 1))))
+`(org-special-keyword ((t (:foreground ,bgchroma6 :height .5 :line-spacing 1))))
+`(org-property-value ((t (:foreground ,bgchroma6 :height .5))) t)
 
 ;; indentation
-;; `(org-hide ((t (:foreground "cadetblue" :family "Monospace" :height 1.0)))) ;; the stars at the front of the headers, 1 means hidden?
-;; `(org-indent ((t (:foreground "orange" :background "blue" :family "Monospace" :height 1.0))))
-`(org-hide ((t (:foreground ,fgchroma1 :weight bold :background ,bgchroma3))))
+`(org-hide ((t ( :height 1 )))) ;; the stars at the front of the headers, 1 means hidden?
+ `(org-indent ((t (:background "orange" :height 1.1))))
+ `(org-indent-level- ((t (:height 1.0))))
 
-;; inlince code =like this= 
-;;`(org-verbatim ((t (:height .8 :foreground ,fgchroma3 :background ,bgchroma3 :family "Monospace" ))))
+ `(org-indent-level-1 ((t (:height 1.0 :foreground ,bgchroma2))))
+ `(org-indent-level-2 ((t (:height .8 :foreground ,bgchroma2))))
+ `(org-indent-level-3 ((t (:height .7 :foreground ,bgchroma2))))
+ `(org-indent-level-4 ((t (:height .7 :foreground ,bgchroma2))))
+ `(org-indent-level-5 ((t (:height .6 :foreground ,bgchroma2))))
+ `(org-indent-level-6 ((t (:height .6 :foreground ,bgchroma2))))
 
-`(org-document-title ((t (:underline t))))
-`(org-document-info-keyword ((t (:underline t :foreground ,bgchroma6))))
+ `(header-line ((t (:height 4.0)))) ;; doesnt seem to work
+ `(header-line-inactive ((t (:background "red" :foreground "blue")))) ;; doesnt seem to work
 
-`(org-todo ((t (:background ,err, :foreground ,fgchroma1))))
-`(org-done ((t (:foreground "cadetblue"))))
+;; inlince code =like this=
+`(org-verbatim ((t (:height 1.0 :foreground ,fgchroma3 :family ,mono ))))
+
+`(headers ((t (
+	:family ,serif
+	:foreground ,fgchroma1
+	:underline nil
+	:weight bold
+	       ))))
+
+;;`(org-document-title ((t (:underline t))))
+`(org-document-title ((t (
+             :inherit (headers)
+             :height 2.0
+	     :weight bold
+             ))))
+
+`(org-level-1 ((t (
+             :inherit (headers)
+             :height 2.0
+	     :weight regular
+             ))))
+`(markdown-header-face-1 ((t (:inherit (org-level-1)))))
+
+`(org-level-2 ((t (
+             :inherit (headers)
+             :height 1.6
+	     :weight regular
+             ))))
+`(markdown-header-face-2 ((t (:inherit (org-level-2)))))
+
+
+`(org-level-3 ((t (
+             :inherit (headers)
+             :height 1.4
+	     :weight regular
+             ))))
+`(markdown-header-face-3 ((t (:inherit (org-level-3)))))
+
+`(org-level-4 ((t (
+             :inherit (headers)
+             :height 1.4
+	     :weight regular
+             ))))
+`(markdown-header-face-4 ((t (:inherit (org-level-4)))))
+
+`(org-level-5 ((t (
+             :inherit (headers)
+             :height 1.2
+	     :weight regular
+             ))))
+`(markdown-header-face-5 ((t (:inherit (org-level-5)))))
+
+`(org-level-6 ((t (
+             :inherit (headers)
+             :height 1.1
+	     :weight regular
+             ))))
+`(markdown-header-face-6 ((t (:inherit (org-level-6)))))
+
+
+
+
+
+
+`(org-document-info-keyword ((t (:foreground ,bgchroma6))))
+
+`(org-todo ((t (:foreground ,err))))
+`(org-done ((t (:foreground ,hlchroma1))))
 `(org-headline-done ((t (:foreground ,fgchroma3))))
 
-`(org-level-1 ((t (:height 1.0 :weight bold))))
-`(markdown-header-face-1 ((t (:height 1.5 :weight regular))))
-`(org-level-2 ((t (:height 1.0 :weight bold))))
-`(markdown-header-face-2 ((t (:height 1.4 :weight regular))))
-`(org-level-3 ((t (:height 1.0 :weight bold))))
-`(markdown-header-face-3 ((t (:height 1.3 :weight regular))))
-`(org-level-4 ((t (:height 1.0 :weight bold))))
-`(markdown-header-face-4 ((t (:height 1.2 :weight regular))))
-`(org-level-5 ((t (:height 1.0 :weight bold))))
-`(markdown-header-face-5 ((t (:height 1.1 :weight regular))))
-
 `(org-table ((t (:inherit fixed-pitch))))
-`(org-document-info ((t (:foreground "dark orange"))))
-`(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
-`(org-property-value ((t (:inherit fixed-pitch))) t)
-`(org-special-keyword ((t (:inherit (font-lock-comment-face fixed-pitch)))))
+;; `(org-document-info ((t (:foreground "dark orange"))))
+;; `(org-document-info-keyword ((t (:inherit (shadow fixed-pitch)))))
 `(org-tag ((t (:inherit (shadow fixed-pitch) :weight bold ))))
-`(org-verbatim ((t (:inherit (shadow fixed-pitch)))))
 
  `(auto-dim-other-buffers-face ((t (:background ,bgchroma3))))
 
