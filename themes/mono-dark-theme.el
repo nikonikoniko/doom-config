@@ -36,7 +36,6 @@
       (serif "Source Serif Pro")
       (sans "Sans")
       (mono "iosevka"))
-
 (custom-theme-set-faces
  'mono-dark
  `(default ((t (
@@ -45,8 +44,8 @@
 		:stipple nil
 		:inherit nil))))
  `(cursor ((t (:background "turquoise"))))
- `(line-number ((t (:foreground ,bgchroma4))))
- `(line-number-current-line ((t (:foreground ,bgchroma6 :background))))
+ `(line-number ((t (:foreground ,bgchroma4 :height .8 :background ,bgchroma3))))
+ `(line-number-current-line ((t (:foreground ,bgchroma6 :height .8 :background ,bgchroma4))))
  `(vertical-border ((t (:foreground ,bgchroma2 :background ,bgchroma2))))
 
  ;; tiny little line between windows
@@ -135,9 +134,12 @@
  `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma6))))
  `(rainbow-delimiters-depth-3-face ((t (:foreground ,fgchroma6))))
 
-`(org-block ((t (:family ,mono :weight light :height .8 :background ,bgchroma1))))
-`(org-block-begin-line ((t (:foreground ,bgchroma4 :height .5))))
-`(org-meta-line ((t (:foreground ,bgchroma6))))
+ ;; code blocks
+`(org-block ((t (:family ,mono :weight light :height .8 :background ,bgchroma3))))
+`(org-block-begin-line ((t (:foreground ,bgchroma6 :height .6 :slant italic))))
+`(org-meta-line ((t (:foreground ,bgchroma6 :height .6 :slant italic))))
+;; org-jupyter result blocks
+`(org-code ((t (:family ,mono :foreground ,hlchroma2 :background ,bgchroma3 :height .8))))
 
 `(org-link ((t (:foreground ,hlchroma1))))
 `(org-roam-link ((t (:foreground ,obchroma1))))
@@ -158,8 +160,8 @@
  `(org-indent-level-5 ((t (:height .6 :foreground ,bgchroma2))))
  `(org-indent-level-6 ((t (:height .6 :foreground ,bgchroma2))))
 
- `(header-line ((t (:height 4.0)))) ;; doesnt seem to work
- `(header-line-inactive ((t (:background "red" :foreground "blue")))) ;; doesnt seem to work
+ ;; `(header-line ((t (:height 4.0)))) ;; doesnt seem to work
+ ;; `(header-line-inactive ((t (:background "red" :foreground "blue")))) ;; doesnt seem to work
 
 ;; inlince code =like this=
 `(org-verbatim ((t (:height 1.0 :foreground ,fgchroma3 :family ,mono ))))
@@ -167,27 +169,26 @@
 `(headers ((t (
 	:family ,serif
 	:foreground ,fgchroma1
-	:underline nil
 	:weight bold
 	       ))))
 
 ;;`(org-document-title ((t (:underline t))))
 `(org-document-title ((t (
-             :inherit (headers)
-             :height 2.0
-	     :weight bold
+             :height 1.0
              ))))
 
 `(org-level-1 ((t (
              :inherit (headers)
              :height 2.0
-	     :weight regular
+	:underline '(:color "red" :style line)
+	     :weight bold
              ))))
 `(markdown-header-face-1 ((t (:inherit (org-level-1)))))
 
 `(org-level-2 ((t (
              :inherit (headers)
              :height 1.6
+	:underline `(:color ,bgchroma4 :style line)
 	     :weight regular
              ))))
 `(markdown-header-face-2 ((t (:inherit (org-level-2)))))
@@ -196,6 +197,7 @@
 `(org-level-3 ((t (
              :inherit (headers)
              :height 1.4
+	:underline `(:color ,bgchroma4 :style line)
 	     :weight regular
              ))))
 `(markdown-header-face-3 ((t (:inherit (org-level-3)))))
@@ -203,6 +205,7 @@
 `(org-level-4 ((t (
              :inherit (headers)
              :height 1.4
+	:underline `(:color ,bgchroma4 :style line)
 	     :weight regular
              ))))
 `(markdown-header-face-4 ((t (:inherit (org-level-4)))))
@@ -210,6 +213,7 @@
 `(org-level-5 ((t (
              :inherit (headers)
              :height 1.2
+	:underline `(:color ,bgchroma4 :style line)
 	     :weight regular
              ))))
 `(markdown-header-face-5 ((t (:inherit (org-level-5)))))
@@ -217,7 +221,8 @@
 `(org-level-6 ((t (
              :inherit (headers)
              :height 1.1
-	     :weight regular
+             :underline '(:color "red" :style wave)
+             :weight regular
              ))))
 `(markdown-header-face-6 ((t (:inherit (org-level-6)))))
 
@@ -229,8 +234,20 @@
 `(org-document-info-keyword ((t (:foreground ,bgchroma6))))
 
 `(org-todo ((t (:foreground ,err))))
+`(org-tag ((t (:foreground ,hlchroma1))))
 `(org-done ((t (:foreground ,hlchroma1))))
 `(org-headline-done ((t (:foreground ,fgchroma3))))
+
+
+`(org-agenda-date ((t (:foreground ,fgchroma4 :background ,bgchroma4 :underline t))))
+`(org-agenda-date-today ((t (:foreground ,fgchroma1 :weight bold :background ,bgchroma4 :underline t))))
+`(org-agenda-date-weekend ((t (:foreground ,fgchroma5 :background ,bgchroma4 :underline t))))
+
+`(org-agenda-structure ((t (:foreground ,bgchroma6 :weight regular :height 1.2))))
+
+`(org-agenda-done ((t (:foreground ,fgchroma6))))
+`(org-scheduled-today ((t (:foreground ,fgchroma1))))
+`(git-commit-summary ((t (:foreground ,fgchroma1))))
 
 `(org-table ((t (:inherit fixed-pitch))))
 ;; `(org-document-info ((t (:foreground "dark orange"))))

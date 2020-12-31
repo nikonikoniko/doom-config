@@ -238,16 +238,16 @@
 `(org-document-info-keyword ((t (:foreground ,bgchroma6))))
 
 `(org-todo ((t (:foreground ,err))))
-`(org-tag ((t (:foreground ,obchroma2))))
+`(org-tag ((t (:foreground ,hlchroma1))))
 `(org-done ((t (:foreground ,hlchroma1))))
 `(org-headline-done ((t (:foreground ,fgchroma3))))
 
 
-`(org-agenda-date ((t (:foreground ,fgchroma4 :background ,bgchroma4))))
-`(org-agenda-date-today ((t (:foreground ,fgchroma1 :weight bold :background ,bgchroma4))))
-`(org-agenda-date-weekend ((t (:foreground ,fgchroma5 :background ,bgchroma4))))
+`(org-agenda-date ((t (:foreground ,fgchroma4 :background ,bgchroma4 :underline t))))
+`(org-agenda-date-today ((t (:foreground ,fgchroma1 :weight bold :background ,bgchroma4 :underline t))))
+`(org-agenda-date-weekend ((t (:foreground ,fgchroma5 :background ,bgchroma4 :underline t))))
 
-`(org-agenda-structure ((t (:foreground ,bgchroma6 :weight regular :height 1.2 :underline t :background ,bgchroma3))))
+`(org-agenda-structure ((t (:foreground ,bgchroma6 :weight regular :height 1.2))))
 
 `(org-agenda-done ((t (:foreground ,fgchroma6))))
 `(org-scheduled-today ((t (:foreground ,fgchroma1))))
