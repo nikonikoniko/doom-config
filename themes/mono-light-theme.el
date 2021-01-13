@@ -173,11 +173,12 @@
  `(org-indent-level-5 ((t (:height .6 :foreground ,bgchroma2))))
  `(org-indent-level-6 ((t (:height .6 :foreground ,bgchroma2))))
 
- ;; `(header-line ((t (:height 4.0)))) ;; doesnt seem to work
- ;; `(header-line-inactive ((t (:background "red" :foreground "blue")))) ;; doesnt seem to work
+ `(header-line ((t (:inherit nil :height .2 :foreground ,obchroma1 :background ,hlchroma1)))) ;; doesnt seem to work
 
 ;; inlince code =like this= 
 `(org-verbatim ((t (:height 1.0 :foreground ,fgchroma3 :family ,mono ))))
+
+`(typescript-primitive-face ((t (:inherit (font-lock-type-face)))))
 
 `(headers ((t (
 	:family ,serif

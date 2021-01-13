@@ -30,6 +30,8 @@
        :head "#+title: ${title}\n"
        :unnarrowed t)))
 
+
+
 ;; Doom exposes five (optional) variables for controlling fonts in Doom. Here
 ;; are the three important ones:
 ;;
@@ -303,19 +305,26 @@
   (buffer-face-mode)
   )
 
-(setq display-line-numbers-type t)
+(setq global-display-line-numbers-mode nil)
 
-(defun my-display-numbers-hook ()
-  (display-line-numbers-mode t)
-  )
-(add-hook 'prog-mode-hook 'my-display-numbers-hook)
+(defun lines-on ()
+  (setq display-line-numbers-type t)
+  (setq display-line-numbers t)
+  (display-line-numbers-mode t))
+
+(defun lines-off ()
+  (setq display-line-numbers-type nil)
+  (setq display-line-numbers nil)
+  (display-line-numbers-mode nil))
+
+(add-hook 'prog-mode-hook (lambda () (lines-on)))
+(add-hook 'text-mode-hook (lambda () (lines-off)))
+(add-hook 'org-mode-hook (lambda () (lines-off)))
 
 (defun add-padding ()
   (interactive)
   (setq left-margin-width 5)
-  (display-line-numbers-mode nil)
   (setq right-margin-width 5)
-  (setq header-line-format " ")
   ; (hide-mode-line-mode t)
   (set-window-buffer nil (current-buffer)))
 
@@ -607,34 +616,41 @@
 
 
 
-;; (setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
-;; (font-lock-add-keywords nil my-font-lock-keywords)
-;; (setq prettify-symbols-alist '(("lambda" . ?λ)
-;;                                 ("->" . ?→)
-;;                                 ("->>" . ?↠)
-;;                                 ("=>" . ?⟹) ;; long fat arrow
-;;                                 ("/=" . ?≠)
-;;                                 ("!==" . ?≠)
-;;                                 ("===" . ?≡)
-;;                                 ("<=" . ?≤)
-;;                                 ("import" . ?_)
-;;                                 ("from " . ?_)
-;;                                 ("number" . ?Z)
-;;                                 ("string" . ?Σ)
-;;                                 ("boolean" . ?B)
-;;                                 ("return" . ?↳)
-;;                                 ("void" . ?∅)
-;;                                 (">=" . ?≥)
-;;                                 ;;("=<<" . ?=≪)
-;;                                 ;;(">>=" . ?≫=)
-;;                                 ;;("<=<" . ?↢)
-;;                                 ;;(">=>" . ?↣)
-;;                                 ("&&" . ?∧)
-;;                                 ("||" . ?∨)
-;;                                 ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
-;;                                 ;; ("pipe" . (?⟹  (Br . Bl) ? ))
-;;                                 ("not" . ?¬)))
+(setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
 
-;;   (prettify-symbols-mode t)
+(font-lock-add-keywords nil my-font-lock-keywords)
 
-;; (add-hook 'prog-mode-hook () (prettify-symbols-mode t))
+(setq-default prettify-symbols-alist '(("lambda" . ?λ)
+                                ("->" . ?→)
+                                ("->>" . ?↠)
+                                ("=>" . ?⟹) ;; long fat arrow
+                                ("/=" . ?≠)
+                                ("!==" . ?≠)
+                                ("===" . ?≡)
+                                ("<=" . ?≤)
+                                ("import" . ?_)
+                                ("from " . ?_)
+                                ("number" . ?Z)
+                                ("string" . ?Σ)
+                                ("boolean" . ?B)
+                                ("return" . ?↳)
+                                ("void" . ?∅)
+                                (">=" . ?≥)
+                                ;;("=<<" . ?=≪)
+                                ;;(">>=" . ?≫=)
+                                ;;("<=<" . ?↢)
+                                ;;(">=>" . ?↣)
+                                ("&&" . ?∧)
+                                ("||" . ?∨)
+                                ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
+                                ;; ("pipe" . (?⟹  (Br . Bl) ? ))
+                                ("not" . ?¬)))
+
+(prettify-symbols-mode t)
+(add-hook 'prog-mode-hook (lambda () (prettify-symbols-mode t)))
+
+
+
+(add-hook 'prog-mode-hook (lambda () (setq header-line-format "  ")))
+(add-hook 'text-mode-hook (lambda () (setq header-line-format "  ")))
+
