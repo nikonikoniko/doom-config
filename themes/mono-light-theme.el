@@ -74,11 +74,14 @@
  `(shadow ((t ())))
  `(secondary-selection ((t (:background ,bgchroma3))))
  `(trailing-whitespace ((t (:background ,err))))
- `(font-lock-builtin-face ((t (:foreground ,bgchroma6))))
+ `(font-lock-builtin-face ((t (:foreground ,hlchroma3))))
  `(font-lock-comment-delimiter-face ((default (:inherit (font-lock-comment-face)))))
  `(font-lock-comment-face ((t (:foreground ,comment :slant italic))))
- `(font-lock-constant-face ((t (:foreground ,obchroma1))))
+ `(font-lock-constant-face ((t (:foreground ,hlchroma2))))
  `(font-lock-doc-face ((t (:foreground ,fgchroma3))))
+
+ `(highlight-quoted-symbol ((t (:inherit nil :foreground ,hlchroma3))))
+
 
  `(web-mode-html-tag-face ((t (:foreground ,hlchroma3 :weight bold))))
  `(web-mode-html-tag-bracket-face ((t (:foreground ,hlchroma3 :weight bold))))
@@ -114,10 +117,10 @@
  `(link-visited ((t (:weight normal :underline (:color foreground-color :style line) :foreground ,fgchroma6))))
  `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,bgchroma1 :background ,inf)) (t (:inherit (variable-pitch)))))
 
- `(mode-line          ((t (:height 80 :box nil :foreground ,fgchroma6 :background ,bgchroma2))))
- `(mode-line-inactive ((t (:height 80 :box nil :foreground ,fgchroma2 :background ,bgchroma3))))
+ `(mode-line          ((t (:height 80 :box nil :foreground ,bgchroma5 :background ,hlchroma1))))
+ `(mode-line-inactive ((t (:height 80 :box nil :foreground ,fgchroma2 :background ,bgchroma6))))
 
- `(mode-line-buffer-id ((t (:foreground ,fgchroma1))))
+ `(mode-line-buffer-id ((t (:foreground ,bgchroma5))))
  ;; `(mode-line-emphasis ((t (:weight bold))))
  `(mode-line-highlight ((((class color) (min-colors 88)) ) ))
 
@@ -127,8 +130,14 @@
  `(flycheck-warning-overlay ((t (:foreground ,fgchroma6 :background ,war))))
  `(flycheck-info-overlay ((t (:underline ,inf :background ,inf))))
  `(flycheck-info ((t (:underline ,inf :background ,inf))))
+
  `(flycheck-warning ((t (:foreground ,fgchroma3 :background ,war))))
  `(flycheck-error ((t (:foreground ,fgchroma3 :background ,err))))
+ `(cider-error-highlight-face ((t (:foreground ,fgchroma3 :background ,err))))
+
+ `(cider-stacktrace-error-class-face ((t (:foreground ,err))))
+ `(cider-repl-stderr-face ((t (:foreground ,err))))
+
  `(match ((t (:weight bold :foreground ,fgchroma6 :background ,bgchroma2))))
 
  ;; multiple cursor highlight:
@@ -232,7 +241,12 @@
 
 
 
-
+`(highlight-indentation-face ((t (:background ,hlchroma1))))
+`(highlight-indent-guides-even-face ((t (:background ,err))))
+`(highlight-indent-guides-odd-face ((t (:background ,hlchroma1))))
+`(highlight-indent-guides-character-face ((t (:foreground ,fgchroma3))))
+`(highlight-indent-guides-top-character-face ((t (:foreground ,err))))
+`(highlight-indent-guides-stack-character-face ((t (:foreground ,fgchroma6))))
 
 
 `(org-document-info-keyword ((t (:foreground ,bgchroma6))))
@@ -247,10 +261,10 @@
 `(org-agenda-date-today ((t (:foreground ,fgchroma1 :weight bold :background ,bgchroma4 :underline t))))
 `(org-agenda-date-weekend ((t (:foreground ,fgchroma5 :background ,bgchroma4 :underline t))))
 
-`(org-agenda-structure ((t (:foreground ,bgchroma6 :weight regular :height 1.2))))
+`(org-agenda-structure ((t (:family ,serif :foreground ,bgchroma6 :weight regular :height 1.2))))
 
 `(org-agenda-done ((t (:foreground ,fgchroma6))))
-`(org-scheduled-today ((t (:foreground ,fgchroma1))))
+`(org-scheduled-today ((t (:foreground ,fgchroma1, :background ,bgchroma1))))
 `(git-commit-summary ((t (:foreground ,fgchroma1))))
 
 `(org-table ((t (:inherit fixed-pitch))))

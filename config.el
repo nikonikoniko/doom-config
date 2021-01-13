@@ -80,125 +80,46 @@
 ;;  :hook (tty-setup . evil-terminal-cursor-changer-activate))
 
 (require 'web-mode)
-	(setq typescript-indent-level 2)
-	(setq js-indent-level 2)
-	(setq js2-indent-level 2)
-	(setq javascript-indent-level 2)
-	(setq js2-basic-offset 2)
-	(setq web-mode-markup-indent-offset 2)
-	(setq indent-tabs-mode nil)
-	(setq web-mode-markup-indent-offset 2)
-  	(setq web-mode-css-indent-offset 2)
-  	(setq web-mode-code-indent-offset 2)
-  	(setq react-indent-level 2)
-	(setq web-mode-script-padding 2)
 
-;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-;; TYPESCRIPT SETUP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-;; these hooks dont seem to wrk any more
-;; (defun indent-force ()
-;;   	(setq typescript-indent-level 2)
-;; 	(setq js-indent-level 2)
-;; 	(setq js2-indent-level 2)
-;; 	(setq javascript-indent-level 2)
-;; 	(setq js2-basic-offset 2)
-;; 	(setq web-mode-markup-indent-offset 2)
-;; 	(setq indent-tabs-mode nil)
-;; 	(setq web-mode-markup-indent-offset 2)
-;;   	(setq web-mode-css-indent-offset 2)
-;;   	(setq web-mode-code-indent-offset 2)
-;;   	(setq react-indent-level 2)
-;; 	  (setq web-mode-script-padding 2)
-;; 	)
-;; ;; these hooks don't seem to woek any more
-;; (add-hook 'web-mode-hook #'indent-force)
-;; (add-hook 'typescript-mode-hook #'indent-force)
-;; (add-hook 'js2-mode-hook #'indent-force)
-;; (add-hook 'rjsx-mode-hook #'indent-force)
-;; 
-
-;; use the local project TS server instead of the global one
-;; (setq tide-tsserver-executable "node_modules/typescript/bin/tsserver")
+(setq typescript-indent-level 2)
+(setq js-indent-level 2)
+(setq js2-indent-level 2)
+(setq javascript-indent-level 2)
+(setq js2-basic-offset 2)
+(setq web-mode-markup-indent-offset 2)
+(setq indent-tabs-mode nil)
+(setq web-mode-markup-indent-offset 2)
+(setq web-mode-css-indent-offset 2)
+(setq web-mode-code-indent-offset 2)
+(setq react-indent-level 2)
+(setq web-mode-script-padding 2)
 
 (defun setup-tide-mode ()
   (interactive)
   (tide-setup)
   (flycheck-mode +1)
-  (setq flycheck-check-syntax-automatically '(save mode-enabled))
+  (setq flycheck-check-syntax-automatically '(new-line mode-enabled))
   (eldoc-mode +1)
   (tide-hl-identifier-mode +1)
-	;; ADD THESE TO MAKE SURE THAT ESLINT RUNS BOTH IN TSX-TIDE and TYPESCRIPT-TIDE
-	(flycheck-add-mode 'javascript-eslint 'web-mode)
+;; ADD THESE TO MAKE SURE THAT ESLINT RUNS BOTH IN TSX-TIDE and TYPESCRIPT-TIDE
+(flycheck-add-mode 'javascript-eslint 'web-mode)
 
-	;;; THESE FOR ESLINT ONLY
-	(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
-	(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
-	(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
+;;; THESE FOR ESLINT ONLY
+(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
+(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
 
-	;; (add-to-list 'flycheck-disabled-checkers 'typescript-tide)
-        ;; (add-to-list 'flycheck-disabled-checkers 'tsx-tide)
+;; (add-to-list 'flycheck-disabled-checkers 'typescript-tide)
+;; (add-to-list 'flycheck-disabled-checkers 'tsx-tide)
 
-	;; THESE FOR TSLINT ET ALL
-	;;(setq flycheck-disabled-checkers 'typescript-tslint 'tsx-tide)
-	;;(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
-	;;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
-	;;(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
-	;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
+;; THESE FOR TSLINT ET ALL
+;;(setq flycheck-disabled-checkers 'typescript-tslint 'tsx-tide)
+;;(add-to-list 'flycheck-disabled-checkers 'typescript-tslint)
+;;(flycheck-add-next-checker 'typescript-tide 'javascript-eslint 'append)
+;;(flycheck-add-next-checker 'tsx-tide 'javascript-eslint 'append)
+;;(flycheck-add-mode 'javascript-eslint 'typescript-mode)
 
-	;; (setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
-	;; (font-lock-add-keywords nil my-font-lock-keywords)
-;;   (setq prettify-symbols-alist '(("lambda" . ?λ)
-;;                                  ("->" . ?→)
-;;                                  ("->>" . ?↠)
-;;                                  ("=>" . ?⟹) ;; long fat arrow
-;;                                  ;;("=>" . ?→) ;; smaller math arrow
-;;                                  ;;("map" . ?⟾) ;; fat ended arrow
-;;                                  ;;(".map" . ?⟾) 
-;;                                  ;; ("map" . ?↦) ;; thin ended arrow
-;;                                  ("/=" . ?≠)
-;;                                  ("!==" . ?≠)
-;;                                  ("===" . ?≡)
-;;                                  ("<=" . ?≤)
-;; 				 ;; ("if" . ??)
-;; 				 ;; ("const" . ?●) dot
-;; 				 ;; ("import" . ?●)
-;; 				 ;; ("from" . ?●)
-;; 				 ;; ("const " . ?●)
-;; 				 ("import" . ?_)
-;; 				 ("from " . ?_)
-;; 				 ;; ("const" . ?○)
-;; 				 ;;  ("import" . ?○)
-;; 				 ;; ("from" . ?○)
-;; 				 ("number" . ?Z)
-;; 				 ("string" . ?Σ)
-;; 				 ("boolean" . ?B)
-;; 				 ;; ("function" . ?Ƒ)
-;; 				 ;; ("import" . ?⭆) ;; tripple arrow import
-;; 				 ;; ("export" . ?←)
-;; 				 ;; ("return" . ?⮩)
-;; 				 ("return" . ?↳)
-;; 				 ;; ("Promise" . ?∞)
-;; 				 ;; ("async" . ?∞)
-;; 				 ;; ("await" . ?∞)
-;; 				 ("curry" . ?∂)
-;; 				 ("void" . ?∅)
-;; 				 ("partial" . ?∂)
-;; 				 ("Partial" . ?∂)
-;;                                  (">=" . ?≥)
-;;                                  ;;("=<<" . ?=≪)
-;;                                  ;;(">>=" . ?≫=)
-;;                                  ;;("<=<" . ?↢)
-;;                                  ;;(">=>" . ?↣)
-;;                                  ("&&" . ?∧)
-;; 				 ("true" . ?⊤)
-;; 				 ("false" . ?⊥)
-;;                                  ("||" . ?∨)
-;; 				 ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
-;; 				 ;; ("pipe" . (?⟹  (Br . Bl) ? ))
-;;                                  ("not" . ?¬)))
-;; 
-;;   (prettify-symbols-mode t)
+
 ;; 
 ;; 
 )
@@ -257,16 +178,6 @@
 (require 'company-org-roam)
 (push 'company-org-roam company-backends)
 
-;; (add-hook 'after-change-major-mode-hook 'change-my-background-color)
-;; (add-hook 'window-configuration-change-hook 'change-my-background-color)
-
-(defun change-my-background-color ()
-  (cond
-    ((eq major-mode 'org-mode)
-      (load-theme 'mono-light t))
-    ((eq major-mode 'python-mode)
-      (load-theme 'mono-dark t))))
-;; 
 (defun lights-on () (interactive) (load-theme 'mono-light t))
 (defun lights-off () (interactive) (load-theme 'mono-dark t))
 
@@ -287,7 +198,7 @@
           (interactive (list (doom-thing-at-point-or-region)
                              current-prefix-arg))
           (let ((pt (point)))
-            (switch-to-buffer-other-window (current-buffer))
+            (switch-to-buffer-other-frame (current-buffer))
             ;; (goto-char pt)
             (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
 
@@ -337,21 +248,6 @@
 	))
 
 (map! :leader
-      :desc "next daily"
-      "r n"
-      (lambda ()
-        (interactive)
-        (org-journal-next-entry)))
-
-(map! :leader
-      :desc "previous daily"
-      "r p"
-      (lambda ()
-        (interactive)
-        (org-journal-previous-entry)
-        ))
-
-(map! :leader
       :desc "biffer"
       "r r"
       (lambda ()
@@ -370,37 +266,26 @@
 ;;                       :foreground "cadetblue"
 ;;                       )
 
-(setq org-link-frame-setup '((file . find-file-other-window)) )
+(setq org-link-frame-setup '((file . find-file-other-frame)))
 
 ;; set images smaller
 (setq org-image-actual-width (/ (display-pixel-width) 5))
 
-
-
-
-
-;; (setq auto-dim-other-buffers-face '(:background "#ddd"))
-
-
 (add-hook 'after-init-hook (lambda ()
 			     (when (fboundp 'auto-dim-other-buffers-mode)
 			       (auto-dim-other-buffers-mode t))))
-
-;;(setq-default
-;;left-margin-width 5
-;;right-margin-width 6)
 
 (setq doom-modeline-buffer-state-icon 0)
 (setq doom-modeline-icon nil)
 
 (defface font-lock-function-call-face nil nil)
 (setq callRegex '(
-		  ;; order matters? highrt up takes precedence ?
-		  ("function \\(\.*\\)\(" 1 'font-lock-function-name-face) ;; function THIS(
-		  ("def \\(\.*\\)\(" 1 'font-lock-function-name-face) ;; function THIS(
-		  ("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-call-face) ;; DOTHIS(
-		  ;;("(?<=function ).*?(?=\()" 1 'font-lock-function-name-face)
-		  ))
+                ;; order matters? highrt up takes precedence ?
+                ("function \\(\.*\\)\(" 1 'font-lock-function-name-face) ;; function THIS(
+                ("def \\(\.*\\)\(" 1 'font-lock-function-name-face) ;; function THIS(
+                ("\\<\\(\\sw+\\) ?(" 1 'font-lock-function-call-face) ;; DOTHIS(
+                ;;("(?<=function ).*?(?=\()" 1 'font-lock-function-name-face)
+                ))
 (font-lock-add-keywords 'typescript-mode callRegex)
 (font-lock-add-keywords 'python-mode callRegex)
 
@@ -418,16 +303,20 @@
   (buffer-face-mode)
   )
 
-(global-visual-line-mode nil)
 (setq display-line-numbers-type t)
+
+(defun my-display-numbers-hook ()
+  (display-line-numbers-mode t)
+  )
+(add-hook 'prog-mode-hook 'my-display-numbers-hook)
 
 (defun add-padding ()
   (interactive)
   (setq left-margin-width 5)
-  (setq display-line-numbers-type nil)
+  (display-line-numbers-mode nil)
   (setq right-margin-width 5)
   (setq header-line-format " ")
-  (hide-mode-line-mode t)
+  ; (hide-mode-line-mode t)
   (set-window-buffer nil (current-buffer)))
 
 (defun remove-indent ()
@@ -463,6 +352,10 @@
 (add-hook 'markdown-mode-hook 'set-serif)
 
 
+;; notmuch
+;; notmuch
+;; notmuch
+;; notmuch
 
 
 (require 'org-inlinetask)
@@ -501,6 +394,9 @@
 (add-to-list 'evil-emacs-state-modes 'notmmuch-search-mode)
 (add-to-list 'evil-emacs-state-modes 'notmmuch-tree-mode)
 
+
+;; org indent
+
 (require 'org-indent)
 (setq org-indent-boundary-char ?\s)
 
@@ -522,81 +418,6 @@
    ;; (defvar aa (put-text-property 0 (length stri) 'face 'org-fake-schedule stri))
   (insert stri))
   ;;(insert (substring stri 0 nil)))
-
-;; (message (hello nil))
-
-
-;; (setq org-journal-date-prefix "#+TITLE: "
-      ;; org-journal-file-header "#+BEGIN: hello \n #+END:"
-      ;; org-journal-date-format "%a, %Y-%m-%d"
-      ;; org-journal-dir "~/f/notes/roam/journal"
-      ;; org-journal-carryover-items "TODO=\"TODO\"|TODO=\"STARTED\"\"WAITING\"\"SOMEDAY\"\"BACKLOG\""
-      ;; org-journal-file-format "%Y-%m-%d.org")
-
-
-
-(defun org-indent--compute-prefixes ()
-    "Compute prefix strings for regular text and headlines."
-    (setq org-indent--heading-line-prefixes
-          (make-vector org-indent--deepest-level nil))
-    (setq org-indent--inlinetask-line-prefixes
-          (make-vector org-indent--deepest-level nil))
-    (setq org-indent--text-line-prefixes
-          (make-vector org-indent--deepest-level nil))
-    (dotimes (n org-indent--deepest-level)
-      (let ((indentation (if (<= n 1) 0
-                           (* (1- org-indent-indentation-per-level)
-                              (1- n)))))
-        ;; Headlines line prefixes.
-        (let ((heading-prefix (make-string indentation ?A)))
-          (aset org-indent--heading-line-prefixes
-                (cond ((= n 1) 0)
-                      ((= n 2) 0)
-                      ((= n 3) 0)
-                      ((= n 4) 0)
-                      (t 2))
-                (org-add-props heading-prefix nil 'face 'org-indent))
-          ;; Inline tasks line prefixes
-          (aset org-indent--inlinetask-line-prefixes
-                n
-                (cond ((<= n 1) "")
-                      ((bound-and-true-p org-inlinetask-show-first-star)
-                       (concat org-indent-inlinetask-first-star
-                               (substring heading-prefix 1)))
-                      (t (org-add-props heading-prefix nil 'face 'org-indent)))))
-        ;; Text line prefixes.
-        (aset org-indent--text-line-prefixes
-              n
-              (org-add-props
-                  (concat (make-string
-                           (+
-                            ;; TODO: Wrap it into customisation
-                            ;;
-                            ;; This is special hack to mititagte difference
-                            ;; between content indentation and headlines
-                            ;; indentation. When headline and content have
-                            ;; different fonts or fonts of the different height,
-                            ;; the width of indentation will be different to,
-                            ;; breaking it.
-                            (cond ((= n 1) 3) ;; Level 1 content indentation
-                                  ((= n 2) 4) ;; Level 2 content indentation
-                                  ((= n 3) 6) ;; Level 3 content indentation
-                                  ((= n 4) 9) ;; Level 3 content indentation
-                                  ((= n 5) 10) ;; Level 3 content indentation
-                                  ((= n 6) 12) ;; Level 3 content indentation
-                                  (t n))      ;; Everything else
-                            ;; End of hack
-                              indentation) ?*)
-                          (and (> n 0)
-                               (char-to-string org-indent-boundary-char)))
-                  nil 'face (cond ((= n 1) 'org-indent-level-1) 
-				  ((= n 2) 'org-indent-level-2)
-				  ((= n 3) 'org-indent-level-3)
-				  ((= n 4) 'org-indent-level-4)
-				  ((= n 5) 'org-indent-level-5)
-				  ((= n 6) 'org-indent-level-6)
-				  (t 'org-indent-level-4))
-		  )))))
 
 
 
@@ -661,56 +482,159 @@
 (add-hook 'org-agenda-mode-hook 'add-padding)
 
 (setq org-agenda-custom-commands
-      '(("z" "nikos view"
-         ((agenda "" ((org-agenda-span 5)))
-          (alltodo "" ((org-agenda-overriding-header "")
-                       (org-super-agenda-groups
-                                '(
-                                 (:name "Todayyyy"
-                                  ;; :time-grid t
-                                  :scheduled today
-                                  :deadline today)
-				(:name "Overdue"
-                                  :deadline past
-                                  :scheduled past)
-				(:name "Deadlines"
-                                  :deadline future
-				  :order 3)
-                                 (:name "Front Burner"
-                                  :todo "STRT"
-				  :order 2)
-                                 (:name "backlog"
-                                  :todo "HOLD"
-				  :order 12)
-				 (:name "scheduled"
-				  :scheduled future
-				  :order 4
-				  )
-                                 (:name "Work (unscheduled)"
-                                  :tag "work"
-				  :order 5)
-                                 (:name "Email (unscheduled)"
-                                  :tag "email"
-				  :order 6)
-                                 (:name "Personal (unscheduled)"
-                                  :tag "personal"
-				  :order 7)
-                                 (:name "Learn (unscheduled)"
-                                  :tag "learn"
-				  :order 8)
-                                 (:name "!!! to triage! ----- schedule or tag"
-                                  :todo "TODO"
-				  :order 1)
-                                 (:name "Waiting"
-                                  :todo "WAIT"
-				  :order 10)
-                                 ))))))))
+    '(("z" "nikos view"
+        ((agenda "" ((org-agenda-span 5)))
+        (alltodo "" ((org-agenda-overriding-header "")
+                (org-super-agenda-groups
+                        '(
+                                (:name "      todayyyy"
+                                ;; :time-grid t
+                                :scheduled today
+                                :deadline today)
+                        (:name "       overdue"
+                                :deadline past
+                                :scheduled past)
+                        (:name "       deadlines"
+                                :deadline future
+                                :order 3)
+                                (:name "      front Burner"
+                                :todo "STRT"
+                                :order 2)
+                                (:name "      backlog"
+                                :todo "HOLD"
+                                :order 12)
+                                (:name "      scheduled"
+                                :scheduled future
+                                :order 4
+                                )
+                                (:name "      Work (unscheduled)"
+                                :tag "work"
+                                :order 5)
+                                (:name "      Email (unscheduled)"
+                                :tag "email"
+                                :order 6)
+                                (:name "      Personal (unscheduled)"
+                                :tag "personal"
+                                :order 7)
+                                (:name "      Learn (unscheduled)"
+                                :tag "learn"
+                                :order 8)
+                                (:name "!!!   to triage! ----- schedule or tag"
+                                :todo "TODO"
+                                :order 1)
+                                (:name "     Waiting"
+                                :todo "WAIT"
+                                :order 10)
+                                ))))))))
 
-;;(setq sublimity-map-size 20)
-;;(setq sublimity-map-fraction 0.3)
-;;(setq sublimity-map-text-scale -7)
-;; (require 'sublimity)
-;;(require 'sublimity-scroll)
-;; (require 'sublimity-map) ;; experimental
-;; (require 'sublimity-attractive)
-;;(setq sublimity-attractive-centering-width 110)
+;; (set-frame-parameter (selected-frame) 'alpha '(100 100))
+
+
+;; (add-hook 'focus-out-hook
+;;          (lambda ()
+;;            (interactive)
+;;            (doom/set-frame-opacity 50)))
+
+;; (add-hook 'focus-in-hook
+;;          (lambda ()
+;;            (interactive)
+;;            (doom/set-frame-opacity 100)))
+
+;; (add-to-list 'default-frame-alist '(alpha 50 50))
+
+(setq highlight-indent-guides-method 'character)
+(add-hook 'prog-mode-hook 'highlight-indent-guides-mode)
+
+(setq publishing-dir "/home/uer/f/code/niko.io/notes")
+
+(defun get-files-to-publish ()
+  (cd org-directory)
+  (message "pppppppppppppppppppppppppp")
+  (message (first (split-string (shell-command-to-string "grep -rlH '#+public: true' .") "\n")))
+  (split-string (shell-command-to-string "grep -rlH '#+public: true' .") "\n")
+  )
+
+;; cheeeck thiiis outttt
+(setq my-blog-extra-head
+      (concat
+       "<link rel='stylesheet' href='../style.css' />\n"
+       "<link rel='stylesheet' href='/../res/main.css' />"))
+
+(setq org-publish-project-alist
+      `(("homeeoxs"
+       :base-directory ,org-directory
+       :publishing-directory ,publishing-dir
+       :publishing-function org-html-publish-to-html
+       :exclude ".*"
+         ;; the following removes extra headers from HTML output -- important!
+         :html-link-home "/"
+         ;; :html-head nil ;; cleans up anything that would have been in there.
+         :html-head-extra ,my-blog-extra-head
+         ; :html-head-include-default-style nil
+         ; :html-head-include-scripts nil
+         ; :html-viewport nil
+       :recursive t
+       :include ,(get-files-to-publish)
+       )))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;; (setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
+;; (font-lock-add-keywords nil my-font-lock-keywords)
+;; (setq prettify-symbols-alist '(("lambda" . ?λ)
+;;                                 ("->" . ?→)
+;;                                 ("->>" . ?↠)
+;;                                 ("=>" . ?⟹) ;; long fat arrow
+;;                                 ("/=" . ?≠)
+;;                                 ("!==" . ?≠)
+;;                                 ("===" . ?≡)
+;;                                 ("<=" . ?≤)
+;;                                 ("import" . ?_)
+;;                                 ("from " . ?_)
+;;                                 ("number" . ?Z)
+;;                                 ("string" . ?Σ)
+;;                                 ("boolean" . ?B)
+;;                                 ("return" . ?↳)
+;;                                 ("void" . ?∅)
+;;                                 (">=" . ?≥)
+;;                                 ;;("=<<" . ?=≪)
+;;                                 ;;(">>=" . ?≫=)
+;;                                 ;;("<=<" . ?↢)
+;;                                 ;;(">=>" . ?↣)
+;;                                 ("&&" . ?∧)
+;;                                 ("||" . ?∨)
+;;                                 ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
+;;                                 ;; ("pipe" . (?⟹  (Br . Bl) ? ))
+;;                                 ("not" . ?¬)))
+
+;;   (prettify-symbols-mode t)
+
+;; (add-hook 'prog-mode-hook () (prettify-symbols-mode t))

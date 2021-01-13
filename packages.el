@@ -43,6 +43,7 @@
 (package! jupyter)
 
 (package! org-super-agenda)
+(package! highlight-indent-guides)
 
 ;; to enable my custom font setting in config
 (package! solaire-mode :disable t)
