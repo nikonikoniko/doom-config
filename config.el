@@ -332,20 +332,20 @@
  (interactive)
  (+org-pretty-mode t)
  (setq
-	org-adapt-indentation nil ;; do not automatically insert 'tabs' to balance text under headlines
+        org-adapt-indentation nil ;; do not automatically insert 'tabs' to balance text under headlines
         org-startup-indented nil ;; don't 'fake' any indentation either
-	org-indent-mode nil ;; don't 'fake' any indentation either
-	org-hide-leading-stars nil ;; hide the starts in front of the headlines
-	org-indent-mode-turns-on-hiding-stars nil ;; in indent mode hide the leading stars too
-	org-pretty-entities t
-	org-indent-indentation-per-level 1
-      	;; org-bullets-bullet-list '("➤") ;; no bullets, needs org-bullets package
-      	;; org-bullets-bullet-list '("\u200b") ;; no bullets, needs org-bullets package
-      	;; org-bullets-bullet-list '("\u200b") ;; zero-width-space character
-      	org-bullets-bullet-list '(">") ;; no bullets, needs org-bullets package
-      	org-bullets-bullet-list '("*" "**" "***" "****" "*****" "******") ;; no bullets, needs org-bullets package
-      	;; org-bullets-bullet-list '("") ;; no bullets, needs org-bullets package
-      	org-ellipsis '("...")
+        org-indent-mode nil ;; don't 'fake' any indentation either
+        org-hide-leading-stars nil ;; hide the starts in front of the headlines
+        org-indent-mode-turns-on-hiding-stars nil ;; in indent mode hide the leading stars too
+        org-pretty-entities t
+        org-indent-indentation-per-level 1
+        ;; org-bullets-bullet-list '("➤") ;; no bullets, needs org-bullets package
+        ;; org-bullets-bullet-list '("\u200b") ;; no bullets, needs org-bullets package
+        ;; org-bullets-bullet-list '("\u200b") ;; zero-width-space character
+        org-bullets-bullet-list '(">") ;; no bullets, needs org-bullets package
+        org-bullets-bullet-list '("*" "**" "***" "****" "*****" "******") ;; no bullets, needs org-bullets package
+        ;; org-bullets-bullet-list '("") ;; no bullets, needs org-bullets package
+        org-ellipsis '("...")
        )
   (advice-add 'org-indent-initialize :after #'org-indent-use-stars-for-strings)
   )
@@ -588,37 +588,17 @@
 
 
 
+(setq my-font-lock-keywords '(
+                              ("return" . font-lock-constant-face)
+                              ("," . font-lock-type-face)
+                              ("\\." . font-lock-type-face)
+                              ("\\:" . font-lock-type-face)
+                              ("<" . font-lock-type-face)
+                              (">" . font-lock-type-face)
+                              ("|" . font-lock-type-face)
+                              (";" . font-lock-type-face)))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-(setq my-font-lock-keywords '(("return" . font-lock-constant-face)))
-
-(font-lock-add-keywords nil my-font-lock-keywords)
+(add-hook 'prog-mode-hook (lambda () (font-lock-add-keywords nil my-font-lock-keywords)))
 
 (setq-default prettify-symbols-alist '(("lambda" . ?λ)
                                 ("->" . ?→)

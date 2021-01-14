@@ -117,7 +117,7 @@
  `(link-visited ((t (:weight normal :underline (:color foreground-color :style line) :foreground ,fgchroma6))))
  `(tooltip ((((class color)) (:inherit (variable-pitch) :foreground ,bgchroma1 :background ,inf)) (t (:inherit (variable-pitch)))))
 
- `(mode-line          ((t (:height 80 :box nil :foreground ,bgchroma5 :background ,hlchroma1))))
+ `(mode-line          ((t (:height 80 :box nil :foreground ,bgchroma5 :background ,fgchroma6))))
  `(mode-line-inactive ((t (:height 80 :box nil :foreground ,fgchroma2 :background ,bgchroma6))))
 
  `(mode-line-buffer-id ((t (:foreground ,bgchroma5))))
@@ -144,8 +144,8 @@
  `(iedit-occurrence ((t (:background "cyan"))))
  `(next-error ((t (:inherit (region)))))
  `(rainbow-delimiters-depth-1-face ((t (:foreground ,bgchroma5))))
- `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma6))))
- `(rainbow-delimiters-depth-3-face ((t (:foreground ,fgchroma6))))
+ `(rainbow-delimiters-depth-2-face ((t (:foreground ,bgchroma5))))
+ `(rainbow-delimiters-depth-3-face ((t (:foreground ,bgchroma5))))
 
  ;; code blocks
 `(org-block ((t (:family ,mono :weight light :height .8 :background ,bgchroma3))))
@@ -173,7 +173,7 @@
  `(org-indent-level-5 ((t (:height .6 :foreground ,bgchroma2))))
  `(org-indent-level-6 ((t (:height .6 :foreground ,bgchroma2))))
 
- `(header-line ((t (:inherit nil :height .2 :foreground ,obchroma1 :background ,hlchroma1)))) ;; doesnt seem to work
+ `(header-line ((t (:inherit nil :height .2 :foreground ,obchroma1 :background ,bgchroma3)))) ;; doesnt seem to work
 
 ;; inlince code =like this= 
 `(org-verbatim ((t (:height 1.0 :foreground ,fgchroma3 :family ,mono ))))
