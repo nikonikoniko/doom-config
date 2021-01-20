@@ -600,6 +600,7 @@
 
 (add-hook 'prog-mode-hook (lambda () (font-lock-add-keywords nil my-font-lock-keywords)))
 
+(defun set-symbols ()
 (setq-default prettify-symbols-alist '(("lambda" . ?λ)
                                 ("->" . ?→)
                                 ("->>" . ?↠)
@@ -608,8 +609,8 @@
                                 ("!==" . ?≠)
                                 ("===" . ?≡)
                                 ("<=" . ?≤)
-                                ("import" . ?_)
-                                ("from " . ?_)
+                                ;("import" . ?_)
+                                ;("from " . ?_)
                                 ("number" . ?Z)
                                 ("string" . ?Σ)
                                 ("boolean" . ?B)
@@ -625,6 +626,8 @@
                                 ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
                                 ;; ("pipe" . (?⟹  (Br . Bl) ? ))
                                 ("not" . ?¬)))
+)
+(set-symbols)
 
 (prettify-symbols-mode t)
 (add-hook 'prog-mode-hook (lambda () (prettify-symbols-mode t)))

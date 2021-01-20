@@ -133,6 +133,8 @@
 
  `(flycheck-warning ((t (:foreground ,fgchroma3 :background ,war))))
  `(flycheck-error ((t (:foreground ,fgchroma3 :background ,err))))
+ `(show-paren-mismatch ((t (:foreground ,fgchroma3 :background ,err))))
+ `(rainbow-delimiters-mismatched-face ((t (:foreground ,fgchroma3 :background ,err))))
  `(cider-error-highlight-face ((t (:foreground ,fgchroma3 :background ,err))))
 
  `(cider-stacktrace-error-class-face ((t (:foreground ,err))))
@@ -151,8 +153,9 @@
 `(org-block ((t (:family ,mono :weight light :height .8 :background ,bgchroma3))))
 `(org-block-begin-line ((t (:foreground ,bgchroma6 :height .6 :slant italic))))
 `(org-meta-line ((t (:foreground ,bgchroma6 :height .6 :slant italic))))
+
 ;; org-jupyter result blocks
-`(org-code ((t (:family ,mono :foreground ,hlchroma2 :background ,bgchroma3 :height .8))))
+`(org-code ((t (:family ,mono :foreground ,err :background ,bgchroma3 :height .8))))
 
 `(org-link ((t (:foreground ,hlchroma1))))
 `(org-roam-link ((t (:foreground ,obchroma1))))
