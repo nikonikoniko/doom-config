@@ -9,19 +9,84 @@
 (setq user-full-name "John Doe"
       user-mail-address "john@doe.com")
 
+;; (require 'exwm)
+;; (require 'exwm-config)
+;; (exwm-config-default)
+
+;; (add-to-list 'exwm-input-prefix-keys ?\C-\s)
+
+;; (defun my-quiet-run (command)
+;;   (interactive (list (read-shell-command "$ ")))
+;;   (start-process-shell-command command nil command))
+
+;; ;; (defun my-run-or-raise (cmd buffer-name)
+;; ;;   (let ((buf (get-buffer buffer-name)))
+;; ;;     (if buf
+;; ;;         (switch-to-buffer buf)
+;; ;;       (my-quiet-run cmd))))
+
+;; ;; (defun my-chromium ()
+;; ;;   (interactive)
+;; ;;   (my-run-or-raise "chromium" "Chromium"))
+
+;; ;; (exwm-input-set-key (kbd "s-b") #'my-chromium)
+
+;; (setq exwm-input-global-keys
+;;       `(([?\s-r] . exwm-reset)
+;; 	([?\s-h] . evil-window-left)
+;; 	([?\s-j] . evil-window-down)
+;; 	([?\s-k] . evil-window-up)
+;; 	([?\s-l] . evil-window-right)
+;; 	([?\s-h] . evil-window-left)
+
+;;         ((kbd "S-<ESC>") . kill-buffer-and-window) ; need to test
+
+;;         ([?\s-p] . (lambda (command)
+;;                      (interactive (list (read-shell-command "$ ")))
+;;                      (start-process-shell-command command nil command)))
+
+;; 	([?\s-q] . evil-quit) ; closes the window
+
+;; 	([?\s-p] . my-quiet-run)
 
 
-(use-package! md-roam ; load immediately, before org-roam
-  :config
-  (setq md-roam-file-extension-single "md")) 
-    ;you can omit this if md, which is the default.
+;; 	([?\s-o] . evil-window-vsplit)
+;; 	([?\s-u] . evil-window-split)
+
+;; 	([?\s-n] . evil-window-next)
+;; 	([?\s-b] . switch-to-buffer)
+
+;; 	([?\s-w] . exwm-workspace-switch)
+;; 	,@(mapcar (lambda (i)
+;; 		    `(,(kbd (format "s-%d" i)) .
+;;                       (lambda ()
+;; 			(interactive)
+;; 			(exwm-workspace-switch-create ,i))))
+;; 		  (number-sequence 0 9))))
+
+;;  ;; see z, my custom view below
+
+;; (map! :leader
+;;       :desc "TODO LIST"
+;;       "TAB"
+;;       (lambda ()
+;; 	(interactive)
+;; 	(evil-window-next nil)
+;; 	))
+
+
+
+
+
+
+
 
 (setq org-directory "~/f/notes/roam")
 (setq org-roam-directory "~/f/notes/roam")
 
+
 ;; order matters, by roam create which is made by default?
-(setq org-roam-file-extensions '("org" "md"))
-(setq md-roam-use-markdown-file-links t) ; default is nil
+(setq org-roam-file-extensions '("org"))
 
 (setq org-roam-capture-templates
       '(("d" "default" plain (function org-roam--capture-get-point)
@@ -193,29 +258,26 @@
 ;;
 ;;   code lookup always open in other window
 ;;
-(dolist (fn '(definition references))
-  (fset (intern (format "+lookup/%s-other-window" fn))
-        (lambda (identifier &optional arg)
-          "TODO"
-          (interactive (list (doom-thing-at-point-or-region)
-                             current-prefix-arg))
-          (let ((pt (point)))
-            (switch-to-buffer-other-frame (current-buffer))
-            ;; (goto-char pt)
-            (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
+;; (dolist (fn '(definition references))
+;;   (fset (intern (format "+lookup/%s-other-window" fn))
+;;         (lambda (identifier &optional arg)
+;;           "TODO"
+;;           (interactive (list (doom-thing-at-point-or-region)
+;;                              current-prefix-arg))
+;;           (let ((pt (point)))
+;;             (switch-to-buffer-other-frame (current-buffer))
+;;             ;; (goto-char pt)
+;;             (funcall (intern (format "+lookup/%s" fn)) identifier arg)))))
 
-(map! :leader
-      :desc "jump to definition"
-      "c d" #'+lookup/definition-other-window)
+;; (map! :leader
+;;       :desc "jump to definition"
+;;       "c d" #'+lookup/definition-other-window)
 
-;;
+;; ;;
 ;;
 ;;   Org-Roam 
 ;;
 
-(setq org-roam-buffer-window-parameters '(
-					  (no-delete-other-windows . t)
-					  )) 
 (setq org-roam-buffer-width 0.15)
 (setq org-log-done t)
 
@@ -263,19 +325,27 @@
         (interactive)
         (org-roam-find-file)))
 
+(map! :leader
+      :desc "todo"
+      "i t"
+      (lambda ()
+        (interactive)
+        (org-insert-todo-heading nil)))
+
+
 
 ;;(set-face-attribute 'org-roam-link nil
 ;;                       :foreground "cadetblue"
 ;;                       )
 
-(setq org-link-frame-setup '((file . find-file-other-frame)))
+; (setq org-link-frame-setup '((file . find-file-other-frame)))
 
 ;; set images smaller
 (setq org-image-actual-width (/ (display-pixel-width) 5))
 
 (add-hook 'after-init-hook (lambda ()
-			     (when (fboundp 'auto-dim-other-buffers-mode)
-			       (auto-dim-other-buffers-mode t))))
+                             (when (fboundp 'auto-dim-other-buffers-mode)
+                               (auto-dim-other-buffers-mode t))))
 
 (setq doom-modeline-buffer-state-icon 0)
 (setq doom-modeline-icon nil)
@@ -300,7 +370,7 @@
 
 (defun set-serif () 
   (interactive)
-  (setq buffer-face-mode-face '(:family "Source Serif Pro" :weight regular))
+  (setq buffer-face-mode-face '(:family "Junicode" :weight regular))
   ;; etq line-spacing 0.3)
   (buffer-face-mode)
   )
@@ -332,21 +402,22 @@
  (interactive)
  (+org-pretty-mode t)
  (setq
-        org-adapt-indentation nil ;; do not automatically insert 'tabs' to balance text under headlines
-        org-startup-indented nil ;; don't 'fake' any indentation either
-        org-indent-mode nil ;; don't 'fake' any indentation either
-        org-hide-leading-stars nil ;; hide the starts in front of the headlines
-        org-indent-mode-turns-on-hiding-stars nil ;; in indent mode hide the leading stars too
-        org-pretty-entities t
-        org-indent-indentation-per-level 1
-        ;; org-bullets-bullet-list '("➤") ;; no bullets, needs org-bullets package
-        ;; org-bullets-bullet-list '("\u200b") ;; no bullets, needs org-bullets package
-        ;; org-bullets-bullet-list '("\u200b") ;; zero-width-space character
-        org-bullets-bullet-list '(">") ;; no bullets, needs org-bullets package
-        org-bullets-bullet-list '("*" "**" "***" "****" "*****" "******") ;; no bullets, needs org-bullets package
-        ;; org-bullets-bullet-list '("") ;; no bullets, needs org-bullets package
-        org-ellipsis '("...")
-       )
+  org-adapt-indentation nil ;; do not automatically insert 'tabs' to balance text under headlines
+  org-startup-indented nil ;; don't 'fake' any indentation either
+  org-indent-mode nil ;; don't 'fake' any indentation either
+                                        ; org-hide-leading-stars nil ;; hide the starts in front of the headlines
+                                        ; org-indent-mode-turns-on-hiding-stars nil ;; in indent mode hide the leading stars too
+  org-pretty-entities t
+  org-indent-indentation-per-level 1
+  line-spacing 0.25
+  ;; org-bullets-bullet-list '("➤") ;; no bullets, needs org-bullets package
+  ;; org-bullets-bullet-list '("\u200b") ;; no bullets, needs org-bullets package
+  ;; org-bullets-bullet-list '("\u200b") ;; zero-width-space character
+  org-bullets-bullet-list '(">") ;; no bullets, needs org-bullets package
+  org-bullets-bullet-list '("*" "**" "***" "****" "*****" "******") ;; no bullets, needs org-bullets package
+  ;; org-bullets-bullet-list '("") ;; no bullets, needs org-bullets package
+  org-ellipsis '("...")
+  )
   (advice-add 'org-indent-initialize :after #'org-indent-use-stars-for-strings)
   )
 
@@ -355,7 +426,7 @@
 ;; like this (in packages.el): 
 ;; (package! solaire-mode :disable t)
 (add-hook 'org-mode-hook 'set-serif)
-(add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
+; (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1)))
 (add-hook 'org-mode-hook 'add-padding)
 (add-hook 'org-mode-hook 'remove-indent)
 (add-hook 'markdown-mode-hook 'set-serif)
@@ -366,35 +437,6 @@
 ;; notmuch
 ;; notmuch
 
-
-(require 'org-inlinetask)
-
-
-  (push '("r" "Respond to email"
-          entry (file org-default-notes-file)
-          "* TODO Respond to %:from on %:subject  :email: \nSCHEDULED: %t\n%U\n%a\n"
-          :clock-in t
-          :clock-resume t
-          :immediate-finish t)
-        org-capture-templates)
-
-
-(defun vedang/notmuch-reply-later ()
-  "Capture this email for replying later."
-  (interactive)
-  ;; You need `org-capture' to be set up for this to work. Add this
-  ;; code somewhere in your init file after `org-cature' is loaded:
-
-
-  (org-capture nil "r")
-
-  ;; The rest of this function is just a nice message in the modeline.
-  (let* ((email-subject (format "%s..."
-                                (substring (notmuch-show-get-subject) 0 15)))
-         (email-from (format "%s..."
-                             (substring (notmuch-show-get-from) 0 15)))
-         (email-string (format "%s (From: %s)" email-subject email-from)))
-    (message "Noted! Reply Later: %s" email-string)))
 
 
 (evil-set-initial-state 'notmuch-search-mode 'emacs)
@@ -429,11 +471,6 @@
   ;;(insert (substring stri 0 nil)))
 
 
-
-
-
-
-
 ;; (setq org-babel-default-header-args '((:exports . "both"))) ;; enabling this causes the jupyter-typescript block below not work...
 
 ;; (setq org-babel-default-header-args:typescript '((:session . "ts")))
@@ -453,36 +490,10 @@
   ;; (org-babel-jupyter-override-src-block "typescript") ;; alias all python to jupyter-python
  )
 
-
-(use-package! treemacs-persp
-  :when (featurep! :ui workspaces)
-  :after (treemacs persp-mode)
-  :config
-  (treemacs-set-scope-type 'Perspectives))
-
-(after! treemacs
-  (defun +treemacs--init ()
-    (require 'treemacs)
-    (let ((origin-buffer (current-buffer)))
-      (cl-letf (((symbol-function 'treemacs-workspace->is-empty?)
-                 (symbol-function 'ignore)))
-        (treemacs--init))
-      (unless (bound-and-true-p persp-mode)
-        (dolist (project (treemacs-workspace->projects (treemacs-current-workspace)))
-          (treemacs-do-remove-project-from-workspace project)))
-      (with-current-buffer origin-buffer
-        (let ((project-root (or (doom-project-root) default-directory)))
-          (treemacs-do-add-project-to-workspace
-           (treemacs--canonical-path project-root)
-           (doom-project-name project-root)))
-        (setq treemacs--ready-to-follow t)
-        (when (or treemacs-follow-after-init treemacs-follow-mode)
-          (treemacs--follow))))))
-
 (org-super-agenda-mode t)
 (setq org-agenda-start-day "-1d")
 
-(setq org-agenda-files '("~/f/notes/roam"))
+(setq org-agenda-files '("~/f/notes/roam" "~/f/notes/roam/daily"))
 ;; save org buffers after todo
 (add-hook 'focus-out-hook
          (lambda () (org-save-all-org-buffers)))
@@ -492,7 +503,7 @@
 
 (setq org-agenda-custom-commands
     '(("z" "nikos view"
-        ((agenda "" ((org-agenda-span 5)))
+        ((agenda "" ((org-agenda-span 12)))
         (alltodo "" ((org-agenda-overriding-header "")
                 (org-super-agenda-groups
                         '(
@@ -593,47 +604,110 @@
                               ("," . font-lock-type-face)
                               ("\\." . font-lock-type-face)
                               ("\\:" . font-lock-type-face)
-                              ("<" . font-lock-type-face)
-                              (">" . font-lock-type-face)
-                              ("|" . font-lock-type-face)
+                              ;; ("<" . font-lock-type-face)
+                              ;; (">" . font-lock-type-face)
+                              ;; ("|" . font-lock-type-face)
                               (";" . font-lock-type-face)))
 
 (add-hook 'prog-mode-hook (lambda () (font-lock-add-keywords nil my-font-lock-keywords)))
 
+
 (defun set-symbols ()
-(setq-default prettify-symbols-alist '(("lambda" . ?λ)
-                                ("->" . ?→)
-                                ("->>" . ?↠)
-                                ("=>" . ?⟹) ;; long fat arrow
-                                ("/=" . ?≠)
-                                ("!==" . ?≠)
-                                ("===" . ?≡)
-                                ("<=" . ?≤)
-                                ;("import" . ?_)
-                                ;("from " . ?_)
-                                ("number" . ?Z)
-                                ("string" . ?Σ)
-                                ("boolean" . ?B)
-                                ("return" . ?↳)
-                                ("void" . ?∅)
-                                (">=" . ?≥)
-                                ;;("=<<" . ?=≪)
-                                ;;(">>=" . ?≫=)
-                                ;;("<=<" . ?↢)
-                                ;;(">=>" . ?↣)
-                                ("&&" . ?∧)
-                                ("||" . ?∨)
-                                ;; (" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
-                                ;; ("pipe" . (?⟹  (Br . Bl) ? ))
-                                ("not" . ?¬)))
-)
+  (mapcar
+   (lambda (s)
+     (push s prettify-symbols-alist))
+   [
+    ("lambda" . ?λ)
+    ("#(" . (?λ  (Br . Bl) ?\())
+    ("->" . ?→)
+    ("eee" . ?→)
+    ("->>" . ?↠)
+    ("=>" . ?⟹) ;; long fat arrow
+    ("/=" . ?≠)
+    ("!==" . ?≠)
+    ("===" . ?≡)
+    ("<=" . ?≤)
+    ("number" . ?Z)
+    ("string" . ?Σ)
+    ("boolean" . ?B)
+    ("return" . ?↳)
+    ("void" . ?∅)
+    (">=" . ?≥)
+    ;; ("=<<" . ?=≪) causes error?
+    ;; (">>=" . ?≫=) causes error?
+    ;; ("<=<" . ?↢) causes error?
+    ;; (">=>" . ?↣) causes error?
+    ;; ("&&" . ?∧) causes error?
+    ;; ("and" . ?∧)
+    ;; ("or" . ?∨)
+    ;; ;'(" = " . (?  (Br . Bl) ?⇔ (Br . Bl) ? ))
+    ;; ;'("pipe" . (?⟹  (Br . Bl) ? ))
+    ;; ("not" . ?¬)
+    ])
+  (prettify-symbols-mode t))
+
 (set-symbols)
 
 (prettify-symbols-mode t)
-(add-hook 'prog-mode-hook (lambda () (prettify-symbols-mode t)))
+; (add-hook 'prog-mode-hook (lambda () (set-symbols))) ; this actually works to prettify symbols.  problem is we don't want it
 
 
 
 (add-hook 'prog-mode-hook (lambda () (setq header-line-format "  ")))
 (add-hook 'text-mode-hook (lambda () (setq header-line-format "  ")))
 
+(require 'ob-clojure)
+(setq org-babel-clojure-backend 'cider)
+(require 'cider)
+
+(defun emacs-startup-screen ()
+  "Display the weekly org-agenda and all todos."
+  (org-agenda nil "z"))
+(add-hook 'emacs-startup-hook #'emacs-startup-screen)
+
+;;
+;;
+;;
+;;  ORG CALDAV
+;;
+;;
+;;
+
+(defun get-files-in-notes ()
+  (cd org-directory)
+  (message "getting notes files")
+  (message (first (split-string (shell-command-to-string "find . -type f -name '*.org'") "\n")))
+  (remove "./caldav-sync.org" (split-string (shell-command-to-string "find . -type f -name '*.org'") "\n"))
+  )
+
+
+(setq org-caldav-url "https://webmail.gandi.net/SOGo/dav/niko@niko.io/Calendar")
+(setq org-caldav-calendar-id "personal")
+(setq org-caldav-inbox "caldav-sync.org")
+(setq org-caldav-files (get-files-in-notes))
+; (setq org-caldav-sync-direction 'org->cal)
+
+(setq org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
+      org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start))
+
+
+
+
+
+(setq
+   ;; essential for large org mode file syncing
+   org-export-with-broken-links t
+   org-export-use-babel nil
+   org-babel-default-header-args (cons `(:eval . "never-export")
+                                       org-babel-default-header-args))
+
+(setq clojure-align-forms-automatically t)
+
+(add-hook 'clojure-mode-hook #'aggressive-indent-mode)
+
+
+(defun add-clj-format-before-save () 
+  (interactive)
+  (add-hook 'before-save-hook #'lsp-format-buffer))
+
+(add-hook 'clojure-mode-hook #'add-clj-format-before-save)

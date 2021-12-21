@@ -158,7 +158,7 @@
 `(org-code ((t (:family ,mono :foreground ,err :background ,bgchroma3 :height .8))))
 
 `(org-link ((t (:foreground ,hlchroma1))))
-`(org-roam-link ((t (:foreground ,obchroma1))))
+`(org-roam-link ((t (:foreground ,hlchroma1))))
 
 `(org-drawer ((t (:foreground ,bgchroma6 :height .5 :line-spacing 1))))
 `(org-special-keyword ((t (:foreground ,bgchroma6 :height .5 :line-spacing 1))))

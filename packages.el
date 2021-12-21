@@ -26,8 +26,11 @@
 (package! web-mode)
 (package! company-org-roam)
 (package! evil-multiedit)
+(package! exwm)
+(package! xelb)
+(package! org-caldav)
 
-(package! frames-only-mode)
+; (package! frames-only-mode)
 
 (package! notmuch)
 
@@ -50,14 +53,13 @@
 (package! solaire-mode :disable t)
 
 (package! ob-typescript)
+; (package! ob-clojurescript) ; wont use because it doesnt put
+;                               separate org src blocks in same repl
+; (package! ob-clojure)
 (package! sublimity)
 
-(package! md-roam
-  :recipe (:host github
-  :repo "nobiot/md-roam"))
-
-
 (package! org-bullets)
+(package! aggressive-indent)
 ;; (package! prettify-symbols-mode)
 ;;(package! load-theme-buffer-local :recipe
 ;;  (:host github :repo "nikonikoniko/color-theme-buffer-local"))

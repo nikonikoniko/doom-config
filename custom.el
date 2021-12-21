@@ -17,3 +17,4 @@
  '(org-level-4 ((t (:inherit headers :extend t :underline "#bbbbbb" :weight regular :height 1.4))))
  '(org-level-6 ((t (:inherit headers :extend t :underline "#bbbbbb" :weight regular :height 1.1)))))
 (put 'customize-variable 'disabled nil)
+(put 'customize-face 'disabled nil)
