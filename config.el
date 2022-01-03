@@ -305,11 +305,7 @@
       "r h"
       (lambda ()
         (interactive)
-	(org-roam-dailies-today)
-	;;(org-journal-new-entry)
-        ;; (org-journal-open-current-journal-file)
-	;; (org-update-all-dblocks)
-	))
+	(org-roam-dailies-goto-today)))
 
 (map! :leader
       :desc "biffer"
@@ -323,15 +319,7 @@
       "r f"
       (lambda ()
         (interactive)
-        (org-roam-find-file)))
-
-(map! :leader
-      :desc "todo"
-      "i t"
-      (lambda ()
-        (interactive)
-        (org-insert-todo-heading nil)))
-
+        (org-roam-node-find)))
 
 
 ;;(set-face-attribute 'org-roam-link nil
